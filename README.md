@@ -13,7 +13,7 @@ El material proporcionado está disponible en:
 
 > **Restricción obligatoria:** según el punto **6.1**, no puede usarse contenido generado por IA en el análisis comparativo y los criterios, las conclusiones y recomendaciones, el párrafo de aporte propio o discusión crítica, ni la redacción y justificaciones del cuestionario. Estas partes deben ser de autoría humana exclusiva.
 
-Todo uso real de IA debe quedar registrado: nivel de asistencia, herramienta, prompt exacto y evidencia verificable. Usá la [bitácora de investigación](docs/templates/research-log.md) durante el trabajo y completá el anexo con información completa y veraz, incluso cuando no se haya usado IA.
+Todo uso real de IA debe quedar registrado: nivel de asistencia, herramienta, prompt exacto y evidencia verificable. Usá la [bitácora de investigación](docs/templates/research-log.md) durante el trabajo y completá el anexo con información completa y veraz, incluso cuando no se haya usado IA. Para ENGRAM Cloud, las personas colaboradoras deben seguir la [guía de inicio](docs/onboarding-engram-cloud-windows.md) y la administración la [guía de enrollment y bootstrap](docs/engram-cloud-admin.md). El acceso al proyecto Cloud ya autorizado `fep` (distinto de `fep-investigacion`) está documentado en la [guía de acceso a FEP](docs/engram-cloud-fep-access.md).
 
 ## Flujo breve de equipo
 
