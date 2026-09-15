@@ -1,0 +1,57 @@
+name: Research / Documentation
+about: Propose research or documentation work with traceable evidence
+title: "docs: "
+labels:
+  - "type:docs"
+body:
+  - type: input
+    id: jira_key
+    attributes:
+      label: Jira key
+      description: Reference the related Jira issue (for example, FEP-123).
+      placeholder: FEP-123
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: State the intended research or documentation outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: List included and excluded work.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Provide sources, observations, or links supporting this work.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define verifiable completion conditions.
+    validations:
+      required: true
+  - type: textarea
+    id: ai_traceability
+    attributes:
+      label: AI-use traceability
+      description: Declare whether AI was used and identify tools, prompts, outputs, and human review.
+      placeholder: "No AI used."
+    validations:
+      required: true
+  - type: checkboxes
+    id: security
+    attributes:
+      label: Security affirmation
+      options:
+        - label: I confirm this issue contains no secrets, private credentials, or sensitive personal data.
+          required: true
