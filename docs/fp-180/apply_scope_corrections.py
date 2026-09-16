@@ -403,12 +403,16 @@ def main() -> int:
     write_results_sheet(workbook, after)
     rebuild_charts(workbook)
     workbook.save(WORKBOOK)
-    write_report(changes, before_results, after_results)
+    if changes:
+        write_report(changes, before_results, after_results)
+        print(f"Informe: {REPORT.name}")
+    else:
+        # Nothing left to correct: keep the report of the pass that did the work.
+        print(f"Sin cambios pendientes; se conserva {REPORT.name} tal como estaba.")
 
     changed = sum(1 for k in before_results
                   if before_results[k]["score"] != after_results[k]["score"])
     print(f"Pares con resultado modificado: {changed} de {len(before_results)}")
-    print(f"Informe: {REPORT.name}")
     return 0
 
 

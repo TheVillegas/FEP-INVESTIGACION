@@ -239,11 +239,15 @@ def main() -> int:
     write_results_sheet(workbook, after)
     rebuild_charts(workbook)
     workbook.save(WORKBOOK)
-    write_report(changes, before_results, after_results)
+    if changes:
+        write_report(changes, before_results, after_results)
+        print(f"Informe: {REPORT.name}")
+    else:
+        # Nothing left to mark: keep the report of the pass that did the work.
+        print(f"Sin celdas heredadas pendientes; se conserva {REPORT.name} tal como estaba.")
 
     computable = sum(1 for r in after_results.values() if r["score"] is not None)
     print(f"Pares con puntaje calculable: {computable} de {len(after_results)}")
-    print(f"Informe: {REPORT.name}")
     return 0
 
 
