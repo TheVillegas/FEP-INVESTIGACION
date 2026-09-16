@@ -5,11 +5,13 @@
 > individual, en sus escenarios elegibles. Documento estructurado con asistencia de IA; queda a
 > validación humana del equipo antes de dar por cumplidos los criterios de término de FP-180.
 >
-> **Revisión 2026-09-16:** una auditoría posterior detectó dos defectos de fondo. El primero
-> —uso de `NA` donde correspondía `0` o `NE`, que convertía datos faltantes en ventaja— está
-> corregido; ver §7 y `correcciones-aplicadas.md`. El segundo —la puntuación no varía entre
-> escenarios, de modo que la unidad producto × escenario de FP-177 aún no está implementada—
-> sigue abierto; ver §8.
+> **Revisión 2026-09-16:** una auditoría posterior detectó dos defectos de fondo, ambos corregidos.
+> El primero —uso de `NA` donde correspondía `0` o `NE`, que convertía datos faltantes en ventaja—
+> en §7 y `correcciones-aplicadas.md`. El segundo —puntuación replicada entre escenarios, que dejaba
+> sin implementar la unidad producto × escenario de FP-177— en §8 y `celdas-heredadas.md`. Tras la
+> corrección quedan **9 pares con puntaje calculable de 61**, y el trabajo pendiente está
+> cuantificado en §9. Las secciones 1 a 6 describen la primera pasada y deben leerse con esa
+> corrección a la vista.
 
 ## 1. Qué se construyó
 
@@ -160,11 +162,11 @@ roles/permisos o guías de gobernanza propias.
 4. Verificar que ningún NA carezca de justificación explícita en la columna Notas (todas las filas NA
    de este libro la tienen) y que ninguna fila puntuada carezca de Fuente (verificado
    programáticamente: 0 filas puntuadas sin fuente en esta versión).
-5. FP-181 (interpretación y recomendaciones) **no puede todavía redactar recomendaciones por
-   escenario**: mientras la puntuación no varíe entre escenarios (§8), la matriz no distingue E1 de
-   E3 para un mismo producto. Sí puede trabajar la lectura por producto y por categoría, teniendo en
-   cuenta que 27 de 61 pares están en "Insufficient evidence" y que el hallazgo de Manurung y Aji
-   (2025) sobre showback/chargeback (sección 4) es un insumo cualitativo, no un ajuste de puntaje.
+5. FP-181 (interpretación y recomendaciones) puede trabajar sobre los 9 pares con puntaje calculable
+   (§8), que son comparación por escenario legítima: E1 permite contrastar las cinco herramientas
+   cloud nativas entre sí. Para E2, E3, E5 y E6 todavía no hay base suficiente para recomendar; ver
+   la prioridad de investigación en §9. El hallazgo de Manurung y Aji (2025) sobre
+   showback/chargeback (sección 4) es un insumo cualitativo, no un ajuste de puntaje.
 
 ## 7. Corrección aplicada: `NA` mal usado como ausencia verificada
 
@@ -193,24 +195,65 @@ sigue reproduciendo S=51,85 / S=54,00, de modo que el motor de cálculo no se vi
 **Esta reclasificación es una propuesta metodológica y requiere validación del equipo**, porque
 ajusta cómo se aplica la escala de FP-177, no solo un dato.
 
-## 8. Defecto abierto: la puntuación no varía entre escenarios
+## 8. Segunda corrección: celdas heredadas entre escenarios
 
-Los 15 productos que aparecen en más de un escenario tienen **valores y textos de evidencia
+Los 15 productos que aparecen en más de un escenario tenían **valores y textos de evidencia
 idénticos en todos ellos** (verificado: cero diferencias de valor y cero diferencias de texto). Es
-decir, las 61 filas de la hoja Calculo contienen 17 evaluaciones replicadas, no 61 evaluaciones
+decir, las 61 filas de la hoja Calculo contenían 17 evaluaciones replicadas, no 61 evaluaciones
 producto × escenario.
 
 Eso contradice FP-177 §1, que fija la unidad de resultado en producto × escenario y exige probar
 cada producto «con las mismas entradas del escenario». Con la matriz así, «recomendación por
-escenario» —el entregable de FP-181 y del informe FP-54— no tiene de dónde salir.
+escenario» —el entregable de FP-181 y del informe FP-54— no tenía de dónde salir.
 
-Resolverlo exige re-evaluar, escenario por escenario, los indicadores sensibles al contexto: V1, V2,
-A2, O1, AU1, M1, M2, I1, I2, P2 y AD1. Ejemplo concreto: I1 pregunta si la herramienta integra «los
-datos requeridos del escenario»; para AWS Cost Explorer la evidencia citada respalda la ingesta de
-datos de facturación (E1), pero no dice nada sobre métricas de clúster y `requests/limits`, que son
-las entradas mínimas de E3. El valor 2 no es trasladable de E1 a E3 sin evidencia propia.
+`mark_scenario_inherited.py` marca como `NE` los valores heredados. Un indicador depende del
+escenario cuando su pregunta observable se refiere al escenario mismo: **V1, A1, A2, O1, AU1, I1,
+I2, AD1 y P2** (cuatro de ellos lo dicen literalmente: O1 «relevante al escenario», I1 «los datos
+requeridos … del escenario», I2 «el flujo de trabajo relevante», AD1 «los roles del escenario»). Los
+otros nueve —V2, O2, AU2, M1, M2, AD2, P1, D1, D2— describen propiedades del producto y no se
+tocaron: una sola investigación los sostiene en todos los escenarios.
 
-Es investigación documental adicional, no un ajuste de fórmulas. Antes de emprenderla conviene que el
-equipo decida el tratamiento provisional de las celdas replicadas: marcarlas `NE` hasta investigarlas
-—honesto, pero baja la cobertura y lleva a más pares a "Insufficient evidence"— o conservarlas con la
-limitación declarada mientras se completa la investigación.
+La evidencia registrada sostiene el valor solo en el escenario donde se recogió, que es aquel en que
+FP-177 §4 sitúa a esa categoría como actor principal: E1 para cloud nativa, E2 para multicloud, E3
+para Kubernetes y E4 para estimación temprana. Fuera de ese ancla el valor es heredado y pasa a `NE`
+—sale del puntaje y reduce la cobertura— en vez de `NA`, que renormalizaría los pesos y escondería
+el hueco.
+
+Ejemplo de por qué no es trasladable: I1 pregunta si la herramienta integra «los datos requeridos del
+escenario»; para AWS Cost Explorer la evidencia citada respalda la ingesta de datos de facturación
+(E1), pero no dice nada sobre métricas de clúster ni `requests/limits`, que son las entradas mínimas
+de E3.
+
+**Resultado: 338 celdas marcadas y 9 pares con puntaje calculable**, más la fila de control:
+
+| Escenario | Pares con puntaje |
+|---|---|
+| E1 | AWS Cost Explorer (51,85), Azure Cost Management (51,85), Google Cloud Billing (38,89), Google Cloud FinOps Hub (23,81), AWS Cost Optimization Hub (19,05) |
+| E2 | nOps (59,52) |
+| E3 | OpenCost (33,33) |
+| E4 | Infracost (47,22), Cloud Custodian (19,05) |
+| E5, E6 | sin pares evaluables |
+
+No es pérdida de trabajo: es la medida real de lo investigado. La evidencia recogida sostiene una
+evaluación por producto en su escenario de origen, y la matriz deja de presentar como 61
+evaluaciones lo que son 17. El detalle celda por celda está en `celdas-heredadas.md`.
+
+## 9. Trabajo pendiente cuantificado
+
+Las **338 celdas** en `NE` por herencia son la investigación que falta para que FP-51 entregue
+comparación por escenario. Cada una necesita documentación oficial que responda la pregunta
+observable del indicador **para las entradas y salidas de ese escenario**, no para el producto en
+general.
+
+A esto se suman las celdas que ya estaban en `NE` por falta de investigación en el escenario de
+origen (Cloudability bloqueada por el 403 de IBM Docs, y la documentación fragmentada de Vantage,
+CloudHealth, Finout, Kubecost, Cast AI y StormForge), que impiden puntuar esos productos incluso en
+su propio escenario ancla.
+
+Prioridad sugerida al equipo, por valor para el informe:
+
+1. **E2 multicloud** — hoy solo nOps puntúa, y es el escenario donde la comparación entre
+   plataformas es el aporte central del trabajo.
+2. **E3 Kubernetes** — hoy solo OpenCost puntúa, con tres herramientas de la categoría sin evaluar.
+3. **E5 y E6** — sin ningún par evaluable; decidir si entran en esta entrega o se declaran fuera de
+   alcance con justificación.

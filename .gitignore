@@ -2,3 +2,10 @@
 .atl/
 .codegraph/
 .obsidian/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Spreadsheet backups written by the FP-180 correction scripts
+*.xlsx.bak

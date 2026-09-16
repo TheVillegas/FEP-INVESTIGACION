@@ -43,7 +43,6 @@ from __future__ import annotations
 
 import collections
 import datetime as dt
-import io
 import shutil
 import sys
 import unicodedata
@@ -51,8 +50,6 @@ from pathlib import Path
 
 import openpyxl
 from openpyxl.chart import BarChart, Reference
-
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
 WORKBOOK = HERE / "FP-180_matriz_comparativa.xlsx"
@@ -382,6 +379,7 @@ def write_report(changes, before, after) -> None:
 
 
 def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if not WORKBOOK.exists():
         print(f"ERROR: no se encontro {WORKBOOK}")
         return 1
