@@ -1,85 +1,75 @@
 # FP-182 — Arquitectura y supuestos del escenario TCO
 
-> **Estado:** borrador actualizado con asistencia de IA, trazable y pendiente de validación humana. No constituye el entregable final ni sustituye las conclusiones o recomendaciones de autoría humana exigidas por el curso.
+> **Estado:** escenario ilustrativo preparado para revisión humana. No es una arquitectura productiva aprobada ni una cotización contractual.
 
-## Decisión propuesta para revisión
+## Decisión de alcance
 
-**Se reemplaza la propuesta previa de Google Cloud IaaS por una arquitectura PaaS basada en Azure Container Apps.** La comparación regional usa la misma configuración en **Chile Central** y **East US**.
-
-La razón es verificable: la matriz FP-48 ya contiene precios públicos comparables para Azure Container Apps en ambas regiones, con las mismas tres unidades de cobro: vCPU-segundo, GiB-segundo y un millón de solicitudes. La propuesta anterior no tenía precios GCP registrados en FP-48, por lo que no permitía una comparación regional reproducible.
-
-Esta decisión **no convierte los precios existentes en un TCO completo**. Los servicios de datos, almacenamiento, egreso y observabilidad siguen pendientes de cotización oficial en ambas regiones.
+Para cumplir TI-06 se adopta un **caso ilustrativo común**: una API web contenedorizada desplegada en Microsoft Azure. La misma arquitectura, demanda, horizonte y moneda se comparan en **Chile Central** y **East US**. La selección no proviene de un sistema real descrito en el repositorio; es el escenario acordado para poder ejecutar FP-183 a FP-186 de forma reproducible.
 
 ```mermaid
 flowchart TB
     U[Usuarios de Internet] --> I[Ingreso HTTPS]
-    I --> ACA[Azure Container Apps\nAPI web contenedorizada]
-    ACA --> DB[(Servicio de datos gestionado\npendiente de cotización)]
-    ACA --> OBJ[Almacenamiento de objetos\npendiente de cotización]
-    ACA --> OBS[Logs y monitoreo\npendiente de cotización]
-    ACA --> NET[Salida a Internet\npendiente de cotización]
+    I --> ACA[Azure Container Apps\nConsumption plan]
+    ACA --> DB[(Azure Database for PostgreSQL\nFlexible Server GP, 2 vCores)]
+    ACA --> OBJ[Blob Storage Hot LRS]
+    ACA --> OBS[Azure Monitor Basic Logs]
+    ACA --> NET[Salida a Internet\nMicrosoft Premium Global Network]
+    DB --> BAK[Backup automático\n7 días, sin LTR/GRS]
 ```
 
-## Alcance del escenario
+## Configuración base
 
-| Incluido | Estado de precio en FP-48 |
+| Capa | Configuración comparable | Regla de costo |
+|---|---|---|
+| Aplicación | Azure Container Apps, plan Consumption; 1 vCPU y 2 GiB activos; producción 730 h/mes | Se aplican primero a producción las franquicias mensuales por suscripción: 180.000 vCPU-s, 360.000 GiB-s y 2 millones de solicitudes. Se asume que la franquicia está íntegramente disponible para cada alternativa regional. |
+| No producción | 0,5 vCPU, 1 GiB, 264 h/mes y 100.000 solicitudes/mes | Consume la franquicia remanente después de producción. Puede escalar a cero fuera de la ventana declarada. |
+| Datos | PostgreSQL Flexible Server General Purpose, **2 vCores**, 100 GiB | General Purpose no ofrece 1 vCore; 2 vCores es el mínimo desplegable. HA queda desactivada en la línea base. |
+| Objetos | Blob Storage Hot LRS, 500 GB iniciales, 20 % de crecimiento anual | Se modela capacidad. Operaciones, lectura y recuperación quedan explícitamente fuera por falta de volumen. |
+| Red | 200 GB/mes de salida a Internet | Se descuentan los primeros 100 GB/mes y se usa Microsoft Premium Global Network: tarifa de Sudamérica para Chile Central y Norteamérica para East US. |
+| Observabilidad | 50 GB/mes de Basic Logs, retención de 30 días | Se modela ingesta; consultas y retención adicional quedan fuera. |
+| Respaldo | Backup automático de PostgreSQL, 7 días | Hasta 100 % del storage provisionado no tiene cargo adicional. Excedente base: 0 GiB. No se usa Azure Backup LTR. |
+
+## Disponibilidad, SLA y continuidad
+
+- PostgreSQL se modela **sin HA** para evitar duplicar cómputo y storage sin un requisito aprobado. La referencia de Microsoft indica 99,9 % para la configuración sin HA.
+- Chile Central y East US ofrecen HA zonal y zone-redundant para PostgreSQL General Purpose. Activarla exige un escenario separado porque replica cómputo y almacenamiento.
+- El backup geo-redundante de PostgreSQL está disponible en East US y no en Chile Central. Por eso no se incluye en la base comparable.
+- La latencia desde Chile se expresa como expectativa de proximidad, no como medición. FP-185 conserva este pendiente.
+
+## Categorías TCO y tratamiento de faltantes
+
+| Categoría | Tratamiento base |
 |---|---|
-| Ejecución de la API en Azure Container Apps: CPU, memoria y solicitudes. | **Cotizable y comparable** para Chile Central y East US. |
-| Servicio de datos gestionado, almacenamiento de objetos, egreso, logs/monitoreo, respaldo y soporte. | Pendiente: deben agregarse precios oficiales pareados antes de cerrar FP-183 o FP-185. |
-| Desarrollo, migración, impuestos, CDN/WAF, identidad, DR multirregional y licencias de terceros. | Excluido salvo evidencia y aprobación humana. |
-
-## Componentes, unidades y supuestos editables
-
-| Capa | Servicio de referencia | Configuración inicial editable | Unidad de cotización | Estado |
-|---|---|---:|---|---|
-| Aplicación | Azure Container Apps | 1 vCPU; 2 GiB; 730 horas/mes de uso activo | vCPU-segundo y GiB-segundo | Precio FP-48 disponible en ambas regiones. |
-| Entrada | Solicitudes de Azure Container Apps | 1.000.000 solicitudes/mes | millón de solicitudes | Precio FP-48 disponible en ambas regiones. |
-| Datos | Base de datos gestionada compatible | 100 GiB iniciales; HA por definir | capacidad, cómputo, backup y operaciones | Pendiente de precio y SKU equivalente. |
-| Objetos | Almacenamiento de objetos | 500 GiB iniciales; 20 % crecimiento anual | GiB-mes, operaciones, recuperación y egreso | Pendiente de precio y SKU equivalente. |
-| Red | Salida a Internet | 200 GB/mes | GB de egreso | Pendiente de precio y regla regional. |
-| Observabilidad | Logs y monitoreo | 50 GiB/mes; retención de 30 días | GiB ingeridos, almacenados y retenidos | Pendiente de precio y SKU equivalente. |
-| No producción | Azure Container Apps | 12 h/día, 22 días/mes | mismas unidades de la aplicación | Palanca futura; no sumar como ahorro antes de modelar la base 24x7. |
-
-## Datos de precio existentes en FP-48
-
-| Medidor | Chile Central | East US | Unidad normalizada | Fecha de matriz |
-|---|---:|---:|---|---|
-| CPU activa estándar | USD 0,1224 | USD 0,0864 | USD/vCPU-hora | 2026-09-13 |
-| Memoria activa estándar | USD 0,0144 | USD 0,0108 | USD/GiB-hora | 2026-09-13 |
-| Solicitudes estándar | USD 0,40 | USD 0,40 | USD por millón de solicitudes | 2026-09-13 |
-
-Los importes se transcriben desde la hoja `Matriz de precios` de FP-48. Son precios de lista y no incluyen descuentos, créditos ni compromisos. Se debe revisar la fuente oficial el día de la entrega.
-
-## Reglas de comparabilidad regional
-
-1. Mantener iguales código, imagen de contenedor, CPU, memoria, solicitudes, horas activas, horizonte y moneda.
-2. Cambiar solo la región y la tarifa oficial asociada a cada medidor.
-3. No usar una SKU distinta para explicar una diferencia como si fuera solo regional.
-4. No calcular el TCO total ni un porcentaje de ahorro hasta completar las partidas pendientes en ambos territorios.
-5. Registrar para cada precio producto, SKU o medidor, región, moneda, fecha, modalidad y URL oficial.
-
-## Palancas FinOps preparadas, no cuantificadas aún
-
-| Palanca | Base | Cambio posible | Riesgo o condición |
-|---|---|---|---|
-| Dimensionamiento | 1 vCPU y 2 GiB activos | Ajustar CPU/memoria según utilización medida | No reducir sin métricas de latencia, errores y saturación. |
-| Escala a cero / horarios no productivos | Definir base 24x7 antes de medir | Detener ambientes no productivos fuera de horario | No aplica al servicio productivo si vulnera el SLA. |
-| Compromisos y descuentos | Precio de lista | Evaluar solo con uso estable y elegibilidad verificada | Evitar sobrecompra y no mezclarlo con el ahorro de rightsizing. |
-
-## Validación humana pendiente
-
-- [ ] El equipo aprueba Azure Container Apps como plataforma común para FP-182, FP-183 y FP-185.
-- [ ] Se confirma que el caso puede ejecutarse como API web contenedorizada y se valida el perfil de carga.
-- [ ] Se incorporan cotizaciones oficiales pareadas para datos, objetos, egreso, observabilidad, respaldo y soporte.
-- [ ] Se verifica disponibilidad de cada servicio y SKU en Chile Central y East US.
-- [ ] Se actualiza FP-183 para sustituir sus líneas GCP por las unidades Azure y no interpretar resultados hasta completar precios.
-- [ ] Se actualiza FP-185 con la comparación regional solo después de completar las partidas pendientes.
+| Licencias de terceros | No aplica justificado: PostgreSQL es open source y no se declaró software tercero. |
+| Soporte | Azure Basic Support, sin cargo adicional; validar si el caso exige un plan pago. |
+| Tráfico interzona | No aplica en la base porque HA está desactivada y los servicios se consideran colocados en una región. |
+| Operaciones Blob y consultas de Monitor | Excluidas explícitamente por falta de volúmenes; no se presentan como ahorro. |
+| Esfuerzo operativo | **Pendiente:** faltan horas/mes y tarifa USD/h. Un vacío no se interpreta como cero. |
+| Implementación de optimizaciones | Se registra en FP-184 y queda pendiente de cifra humana antes de informar ahorro neto. |
 
 ## Trazabilidad
 
-| Tipo | Evidencia |
+| Evidencia | Uso |
 |---|---|
-| Precios comparables | `FP-48 TINV02/TINV_Matriz_de_Fuentes_final_2026-09-13.xlsm`, hoja `Matriz de precios`, filas 2–7. |
-| Selección de plataforma | Misma matriz, hoja `Alternativas`, fila 3; Azure Container Apps está identificado para Chile Central. |
-| Requisito de comparación | Jira FP-185 y las indicaciones TI-06: arquitectura, volumen y periodo constantes entre Santiago y Estados Unidos. |
-| Límite | FP-48 todavía no contiene las tarifas de los componentes no computacionales requeridos para un TCO completo. |
+| `docs/fp-172/TINV-04_FinOps_maestro_2026-09-15_v1_FP-172.xlsx` | Palancas, regiones y parámetros TCO de FP-172/174/176. |
+| `FP-48 TINV02/TINV_Matriz_de_Fuentes_FP-126_actualizada_2026-09-15.xlsx` | Papers, fuentes oficiales y precios normalizados. |
+| Microsoft Learn: Container Apps billing | Franquicias, cobro por uso activo/inactivo y escala a cero. |
+| Microsoft Learn: PostgreSQL compute/overview | Mínimo de 2 vCores GP y disponibilidad regional. |
+| Azure PostgreSQL y Bandwidth Pricing | Backup incluido y tramos de egress. |
+
+## Uso de papers
+
+- Manurung y Cho sustentan gobierno FinOps, rightsizing y optimización bajo restricciones.
+- Chaisiri et al. sustentan decisiones de provisión/compromiso bajo incertidumbre.
+- CloudPricingOps sustenta comparar políticas de precio con datos vigentes y normalizados.
+- El estudio ATLAS sustenta que el egress puede ser material en el TCO.
+- El paper de DoE en Kubernetes sustenta validar CPU/memoria mediante experimentación.
+
+Los papers respaldan el **método**; los precios y disponibilidades provienen de documentación oficial vigente.
+
+## Pendientes humanos
+
+- [ ] Confirmar que el escenario ilustrativo representa el caso que el equipo defenderá.
+- [ ] Informar horas y tarifa de operación.
+- [ ] Validar si se requiere HA, soporte pago, operaciones Blob, consultas o retención adicional.
+- [ ] Medir latencia y aprobar residencia de datos servicio por servicio.
