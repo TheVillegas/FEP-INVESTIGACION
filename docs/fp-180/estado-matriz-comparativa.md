@@ -256,8 +256,35 @@ su propio escenario ancla.
 
 Prioridad sugerida al equipo, por valor para el informe:
 
-1. **E2 multicloud** — hoy solo nOps puntúa, y es el escenario donde la comparación entre
-   plataformas es el aporte central del trabajo.
+1. ~~**E2 multicloud**~~ — **primera pasada completada**; ver §10.
 2. **E3 Kubernetes** — hoy solo OpenCost puntúa, con tres herramientas de la categoría sin evaluar.
-3. **E5 y E6** — sin ningún par evaluable; decidir si entran en esta entrega o se declaran fuera de
-   alcance con justificación.
+   Kubecost necesita 3 celdas (Dependencia y Automatización) para cruzar el umbral.
+3. **E5 y E6** — sin ningún par evaluable, y son los más caros (122 y 85 celdas). Decidir si entran
+   en esta entrega o se declaran fuera de alcance con justificación.
+
+## 10. Primera pasada de investigación: E2
+
+Se completaron con evidencia propia, verificada contra documentación oficial el 2026-09-16, las
+celdas que bloqueaban el escenario multinube. **E2 pasa de 1 a 4 pares puntuados:**
+
+| Producto | S línea base | S sensibilidad | Banda |
+|---|---:|---:|---|
+| Vantage | 66,67 | 66,67 | Solid |
+| nOps | 59,52 | 58,84 | Solid |
+| CloudZero | 57,14 | 58,44 | Solid |
+| CloudHealth | 54,76 | 55,14 | Solid |
+
+Detalle celda por celda, con cita y fuente, en `investigacion-e2.md`.
+
+**Limitación importante para FP-181:** Precio es uno de los dos criterios críticos de E2, y en
+CloudHealth, CloudZero y Vantage queda **sin evidencia** (P1 y P2 en `NE`). Solo nOps tiene el
+criterio evaluado. La comparación de E2 es válida en visibilidad, asignación, multinube,
+integración y adopción, pero **no permite todavía afirmar nada sobre precio**, que es justamente uno
+de los dos ejes que E2 declara centrales. Cerrarlo requiere 6 celdas más (P1 y P2 en los tres
+productos).
+
+**Finout quedó sin desbloquear.** Recibió dos de las tres celdas que necesitaba (V2 y AD2), pero su
+tercer criterio más barato era Dependencia y no existe documentación oficial de dependencias
+propietarias ni de camino de salida. La ruta alternativa —Automatización, vía CostGuard— tampoco
+pudo cerrarse: la documentación describe generación de recomendaciones, pero no ejecución ni bloqueo
+de acciones. Ninguna de las dos se rellenó con un valor inventado.
