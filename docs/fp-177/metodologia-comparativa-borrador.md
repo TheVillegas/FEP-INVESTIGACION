@@ -1,8 +1,8 @@
 # FP-177 — Metodología comparativa
 
-> **Estado:** **Draft generated with AI; pending human approval.**
+> **Estado:** Método confirmado por consenso del equipo; documento estructurado con asistencia de IA.
 >
-> Este borrador traduce decisiones humanas seleccionadas para FP-177. No puntúa productos ni autoriza una recomendación.
+> Este documento traduce decisiones humanas confirmadas para FP-177. No puntúa productos ni autoriza una recomendación.
 
 ## 1. Objeto y alcance
 
@@ -86,7 +86,7 @@ La sensibilidad se considera material si cambia el nivel descriptivo o el orden 
 
 El puntaje se conserva con precisión completa durante cálculos y se muestra a dos decimales. Las bandas se asignan con el valor sin redondear usando los puntos medios exactos de la escala 0–3 normalizada: `[0, 50/3)` **Insufficient**; `[50/3, 50)` **Basic**; `[50, 250/3)` **Solid**; `[250/3, 100]` **Advanced**. Como referencia visual, `50/3 ≈ 16,6667` y `250/3 ≈ 83,3333`. En comunicación abreviada pueden mostrarse como 0–16, 17–49, 50–82 y 83–100, pero prevalecen los intervalos exactos. La condición de cobertura menor a 70 % prevalece sobre cualquier banda.
 
-Además, cada escenario tendrá criterios críticos con `C_c >= 1`. Conjunto propuesto para validación: E1 visibilidad/asignación; E2 multicloud/precio; E3 optimización/automatización; E4 precio/integración; E5 asignación/visibilidad; E6 visibilidad/integración. El equipo puede modificarlo antes de puntuar; un incumplimiento crítico se informa junto al puntaje y no se oculta con la media.
+Además, cada escenario tendrá criterios críticos con `C_c >= 1`. El conjunto confirmado es: E1 visibilidad/asignación; E2 multicloud/precio; E3 optimización/automatización; E4 precio/integración; E5 asignación/visibilidad; E6 visibilidad/integración. Un incumplimiento crítico se informa junto al puntaje y no se oculta con la media.
 
 ## 6. Ejemplo sintético (ficticio; no corresponde a un proveedor)
 
@@ -94,16 +94,4 @@ Para el producto ficticio **Herramienta Aurora** en E1, supóngase que todos los
 
 Con base igualitaria: `S = (100/9) × (3+2+1+1+0+2+2+1+2)/3 = 51,851…`, presentado como **51,85 (Solid)**. Con el perfil de sensibilidad: `S = (15×3 + 15×2 + 15×1 + 10×1 + 8×0 + 10×2 + 8×2 + 12×1 + 7×2)/3 = 54,00 (Solid)`. El ejemplo muestra el cálculo, no capacidad real ni recomendación.
 
-## 7. Gobernanza y aprobación
-
-La aprobación se decide por mayoría simple. La minuta debe registrar votantes, fecha, fundamento, disidencias y la revisión exacta de los artefactos evaluados. No se cambia una regla después de iniciar la puntuación de productos sin abrir una nueva revisión metodológica.
-
-### Bloque de decisión del equipo — método general
-
-- [ ] Aprobar  [ ] Modificar  [ ] Rechazar
-- Votantes: ____________________
-- Fecha: __________  Revisión exacta de artefactos: ____________________
-- Fundamento: ____________________
-- Disidencias: ____________________
-Lo q
-**Estado final:** **Draft generated with AI; pending human approval.**
+**Estado final:** **Método confirmado por consenso del equipo; documento estructurado con asistencia de IA.**

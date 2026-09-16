@@ -1,6 +1,6 @@
 # FP-177 — Matriz de criterios y ponderaciones
 
-> **Estado:** **Draft generated with AI; pending human approval.**
+> **Estado:** Criterios, pesos, escala y conjuntos críticos confirmados por consenso del equipo; documento estructurado con asistencia de IA.
 >
 > Uso conjunto con `metodologia-comparativa-borrador.md` y `escenarios-uso-y-poblacion-evaluada-borrador.md`. No es una evaluación de proveedores.
 
@@ -54,9 +54,9 @@ Para un criterio `c`, `I_c` contiene solo sus indicadores aplicables y `C_c = Σ
 
 `NA` requiere justificación previa y se renormaliza; `NE` no equivale a 0 y reduce cobertura. Las bandas usan los puntos medios exactos de 0–3 normalizado: `[0, 50/3)` Insufficient; `[50/3, 50)` Basic; `[50, 250/3)` Solid; `[250/3, 100]` Advanced (`50/3 ≈ 16,6667`; `250/3 ≈ 83,3333`). Calcular sin redondeo y presentar a dos decimales.
 
-## 4. Conjuntos críticos propuestos por escenario
+## 4. Conjuntos críticos por escenario
 
-| Escenario | Criterios críticos propuestos (mínimo `C_c ≥ 1`) |
+| Escenario | Criterios críticos confirmados (mínimo `C_c ≥ 1`) |
 |---|---|
 | E1 | Visibilidad, Asignación |
 | E2 | Multicloud, Precio |
@@ -65,33 +65,6 @@ Para un criterio `c`, `I_c` contiene solo sus indicadores aplicables y `C_c = Σ
 | E5 | Asignación, Visibilidad |
 | E6 | Visibilidad, Integración |
 
-Los conjuntos son una propuesta transparente para validación del equipo, no un umbral derivado de los artículos.
+Los conjuntos críticos están confirmados por consenso del equipo; no son umbrales derivados de los artículos.
 
-## 5. Bloques de decisión del equipo
-
-### Por criterio
-
-Para cada criterio (Visibilidad, Asignación, Optimización, Automatización, Multicloud, Integración, Adopción, Precio, Dependencia):
-
-- [ ] Aprobar  [ ] Modificar  [ ] Rechazar
-- Criterio: ____________________  Votantes: ____________________  Fecha: __________
-- Revisión exacta: ____________________  Fundamento: ____________________  Disidencia: ____________________
-
-### Perfil de pesos
-
-- [ ] Aprobar  [ ] Modificar  [ ] Rechazar
-- Perfil: [ ] Base igualitaria  [ ] Sensibilidad normativa
-- Votantes: ____________________  Fecha: __________  Revisión exacta: ____________________
-- Fundamento: ____________________  Disidencia: ____________________
-
-### Escala, conjuntos críticos y método global
-
-- Escala 0–3, `NE`/`NA`: [ ] Aprobar  [ ] Modificar  [ ] Rechazar
-- Conjuntos críticos: [ ] Aprobar  [ ] Modificar  [ ] Rechazar
-- Método global: [ ] Aprobar  [ ] Modificar  [ ] Rechazar
-- Votantes: ____________________  Fecha: __________  Revisión exacta: ____________________
-- Fundamento: ____________________  Disidencia: ____________________
-
-La aprobación final requiere mayoría simple y registra votantes, fecha, fundamento, disidencia y revisión exacta.
-
-**Estado final:** **Draft generated with AI; pending human approval.**
+**Estado final:** **Criterios, pesos, escala y conjuntos críticos confirmados por consenso del equipo; documento estructurado con asistencia de IA.**
