@@ -2,3 +2,14 @@
 .atl/
 .codegraph/
 .obsidian/
+
+# Generated working artifacts
+.codex-work/
+.tmp-*/
+*.inspect.ndjson
+__pycache__/
+*.pyc
+/outputs/
+
+# Local preview images
+/docs/fp-184/*.png
