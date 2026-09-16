@@ -12,6 +12,10 @@
 > corrección quedan **9 pares con puntaje calculable de 61**, y el trabajo pendiente está
 > cuantificado en §9. Las secciones 1 a 6 describen la primera pasada y deben leerse con esa
 > corrección a la vista.
+>
+> Ambas correcciones exigieron resolver situaciones que FP-177 no cubre explícitamente. Esas reglas
+> están expuestas para confirmación del equipo en `propuesta-metodologica-fp-180.md` y **todavía no
+> están confirmadas por consenso**.
 
 ## 1. Qué se construyó
 
