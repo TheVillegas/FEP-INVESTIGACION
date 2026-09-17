@@ -5,17 +5,23 @@
 > individual, en sus escenarios elegibles. Documento estructurado con asistencia de IA; queda a
 > validación humana del equipo antes de dar por cumplidos los criterios de término de FP-180.
 >
-> **Revisión 2026-09-16:** una auditoría posterior detectó dos defectos de fondo, ambos corregidos.
-> El primero —uso de `NA` donde correspondía `0` o `NE`, que convertía datos faltantes en ventaja—
-> en §7 y `correcciones-aplicadas.md`. El segundo —puntuación replicada entre escenarios, que dejaba
-> sin implementar la unidad producto × escenario de FP-177— en §8 y `celdas-heredadas.md`. Tras la
-> corrección quedan **9 pares con puntaje calculable de 61**, y el trabajo pendiente está
-> cuantificado en §9. Las secciones 1 a 6 describen la primera pasada y deben leerse con esa
-> corrección a la vista.
+> **Revisión 2026-09-17:** una auditoría detectó dos defectos de fondo, ambos corregidos —uso de
+> `NA` donde correspondía `0` o `NE`, que convertía datos faltantes en ventaja (§7), y puntuación
+> replicada entre escenarios, que dejaba sin implementar la unidad producto × escenario (§8)—.
+> Después se completó la población con las ocho alternativas adicionales (§9) y se investigaron los
+> seis escenarios con evidencia propia.
 >
-> Ambas correcciones exigieron resolver situaciones que FP-177 no cubre explícitamente. Esas reglas
-> están expuestas para confirmación del equipo en `propuesta-metodologica-fp-180.md` y **todavía no
-> están confirmadas por consenso**.
+> **Estado actual: 30 pares con puntaje de 85, y los seis escenarios con productos comparables**
+> (§10). Los hallazgos transversales para FP-181 están en §11 y lo pendiente en §12.
+>
+> **Las secciones 1 a 6 describen la primera pasada** y quedaron superadas por las correcciones
+> posteriores: deben leerse con §7 a §10 a la vista. En particular, la población ya no son 17
+> herramientas sino 25, y la convención de «escenario ancla» que aparece en documentos previos fue
+> retirada.
+>
+> Las cuatro reglas que FP-177 no cubría están resueltas por el responsable de FP-51 y aplicadas;
+> el detalle y su fundamento están en `propuesta-metodologica-fp-180.md`. **Quedan a ratificación
+> del equipo.**
 
 ## 1. Qué se construyó
 
@@ -199,92 +205,92 @@ sigue reproduciendo S=51,85 / S=54,00, de modo que el motor de cálculo no se vi
 **Esta reclasificación es una propuesta metodológica y requiere validación del equipo**, porque
 ajusta cómo se aplica la escala de FP-177, no solo un dato.
 
-## 8. Segunda corrección: celdas heredadas entre escenarios
+## 8. Segunda corrección: la puntuación no variaba entre escenarios
 
-Los 15 productos que aparecen en más de un escenario tenían **valores y textos de evidencia
-idénticos en todos ellos** (verificado: cero diferencias de valor y cero diferencias de texto). Es
-decir, las 61 filas de la hoja Calculo contenían 17 evaluaciones replicadas, no 61 evaluaciones
-producto × escenario.
+Los 15 productos que aparecían en más de un escenario tenían **valores y textos de evidencia
+idénticos en todos ellos**. Es decir, las filas de la hoja Calculo contenían 17 evaluaciones
+replicadas, no una por par producto × escenario como exige FP-177 §1. Con la matriz así,
+«recomendación por escenario» —el entregable de FP-181 y del informe FP-54— no tenía de dónde salir.
 
-Eso contradice FP-177 §1, que fija la unidad de resultado en producto × escenario y exige probar
-cada producto «con las mismas entradas del escenario». Con la matriz así, «recomendación por
-escenario» —el entregable de FP-181 y del informe FP-54— no tenía de dónde salir.
+La corrección se hizo en dos tiempos. Primero se marcaron como `NE` los valores heredados, usando
+una convención llamada «escenario ancla»: la evidencia valía solo donde la categoría del producto es
+actor principal. Eso dejó la matriz honesta pero casi vacía, con 9 pares puntuados.
 
-`mark_scenario_inherited.py` marca como `NE` los valores heredados. Un indicador depende del
-escenario cuando su pregunta observable se refiere al escenario mismo: **V1, A1, A2, O1, AU1, I1,
-I2, AD1 y P2** (cuatro de ellos lo dicen literalmente: O1 «relevante al escenario», I1 «los datos
-requeridos … del escenario», I2 «el flujo de trabajo relevante», AD1 «los roles del escenario»). Los
-otros nueve —V2, O2, AU2, M1, M2, AD2, P1, D1, D2— describen propiedades del producto y no se
-tocaron: una sola investigación los sostiene en todos los escenarios.
+**Esa convención fue retirada.** Al levantarse la restricción de plazo se hizo el trabajo que FP-177
+pide de verdad: investigar cada par con evidencia propia del escenario. El ancla era un atajo y ya no
+forma parte de la metodología aplicada; en su lugar rigen las decisiones 3 y 4 de
+`propuesta-metodologica-fp-180.md`.
 
-La evidencia registrada sostiene el valor solo en el escenario donde se recogió, que es aquel en que
-FP-177 §4 sitúa a esa categoría como actor principal: E1 para cloud nativa, E2 para multicloud, E3
-para Kubernetes y E4 para estimación temprana. Fuera de ese ancla el valor es heredado y pasa a `NE`
-—sale del puntaje y reduce la cobertura— en vez de `NA`, que renormalizaría los pesos y escondería
-el hueco.
+## 9. Población completada con las alternativas adicionales
 
-Ejemplo de por qué no es trasladable: I1 pregunta si la herramienta integra «los datos requeridos del
-escenario»; para AWS Cost Explorer la evidencia citada respalda la ingesta de datos de facturación
-(E1), pero no dice nada sobre métricas de clúster ni `requests/limits`, que son las entradas mínimas
-de E3.
+El criterio de término de FP-51 no pide registrar las alternativas, pide compararlas: «Las
+alternativas son comparadas bajo el mismo escenario». FP-126 las registró y FP-179 las auditó, pero
+la matriz nunca las puntuó.
 
-**Resultado: 338 celdas marcadas y 9 pares con puntaje calculable**, más la fila de control:
+Se incorporaron las ocho —OCI Cost Analysis, IBM Cloud Cost Estimator, Harness, Densify,
+PerfectScale, ScaleOps, AWS Pricing Calculator y Azure Pricing Calculator— con 432 filas nuevas.
+Detalle en `alternativas-adicionales.md`.
 
-| Escenario | Pares con puntaje |
-|---|---|
-| E1 | AWS Cost Explorer (51,85), Azure Cost Management (51,85), Google Cloud Billing (38,89), Google Cloud FinOps Hub (23,81), AWS Cost Optimization Hub (19,05) |
-| E2 | nOps (59,52) |
-| E3 | OpenCost (33,33) |
-| E4 | Infracost (47,22), Cloud Custodian (19,05) |
-| E5, E6 | sin pares evaluables |
+Dos observaciones quedaron registradas para el equipo: **Densify confirma la reserva de FP-179** (su
+documentación lo describe como optimizador de recursos de Kubernetes, no como plataforma FinOps
+multinube) y **ScaleOps queda topado en 1** en todos sus indicadores, porque no se localizó
+documentación técnica fuera de su sitio comercial y rige el límite de FP-177 §2.1.
 
-No es pérdida de trabajo: es la medida real de lo investigado. La evidencia recogida sostiene una
-evaluación por producto en su escenario de origen, y la matriz deja de presentar como 61
-evaluaciones lo que son 17. El detalle celda por celda está en `celdas-heredadas.md`.
+## 10. Estado actual: los seis escenarios con productos comparables
 
-## 9. Trabajo pendiente cuantificado
+| Escenario | Pares con puntaje | Primeros resultados |
+|---|---:|---|
+| E1 nube única | 9 | Vantage 66,67 · nOps 59,52 · CloudZero 58,33 · CloudHealth 56,25 · AWS Cost Explorer 51,85 |
+| E5 multi-tenant | 6 | Vantage 66,67 · CloudZero 58,33 · CloudHealth 56,25 · AWS Cost Explorer 51,85 |
+| E2 multinube | 4 | Vantage 66,67 · nOps 59,52 · CloudZero 58,33 · CloudHealth 56,25 |
+| E4 predespliegue | 5 | Infracost 47,22 · IBM Cloud Cost Estimator 38,89 · AWS Pricing Calculator 35,71 · Azure Pricing Calculator 30,56 |
+| E6 distribuido | 4 | Vantage 66,67 · AWS Cost Explorer 51,85 |
+| E3 Kubernetes | 3 | CloudZero 57,14 · Kubecost 50,00 · OpenCost 33,33 |
 
-Las **338 celdas** en `NE` por herencia son la investigación que falta para que FP-51 entregue
-comparación por escenario. Cada una necesita documentación oficial que responda la pregunta
-observable del indicador **para las entradas y salidas de ese escenario**, no para el producto en
-general.
+**31 pares con puntaje de 86.** La fila de control «Herramienta Aurora» sigue reproduciendo
+S=51,85 / S=54,00, de modo que ninguna pasada alteró el motor de cálculo.
 
-A esto se suman las celdas que ya estaban en `NE` por falta de investigación en el escenario de
-origen (Cloudability bloqueada por el 403 de IBM Docs, y la documentación fragmentada de Vantage,
-CloudHealth, Finout, Kubecost, Cast AI y StormForge), que impiden puntuar esos productos incluso en
-su propio escenario ancla.
+E4 es el escenario más completo en proporción: los cinco productos elegibles puntúan, y permite
+comparar entre sí las tres calculadoras nativas de estimación previa (AWS, Azure e IBM), que antes
+no estaban juntas en ningún escenario.
 
-Prioridad sugerida al equipo, por valor para el informe:
+En E6, Azure Cost Management y Google Cloud Billing conservan puntaje pero quedan **sin banda**, por
+la decisión 1: sus dos criterios críticos no fueron evaluados con evidencia propia del escenario.
 
-1. ~~**E2 multicloud**~~ — **primera pasada completada**; ver §10.
-2. **E3 Kubernetes** — hoy solo OpenCost puntúa, con tres herramientas de la categoría sin evaluar.
-   Kubecost necesita 3 celdas (Dependencia y Automatización) para cruzar el umbral.
-3. **E5 y E6** — sin ningún par evaluable, y son los más caros (122 y 85 celdas). Decidir si entran
-   en esta entrega o se declaran fuera de alcance con justificación.
+El detalle de cada pasada está en `investigacion-e1.md`, `investigacion-e2-precio.md`,
+`investigacion-e3.md`, `investigacion-e4.md`, `investigacion-e5.md` e `investigacion-e6.md`.
 
-## 10. Primera pasada de investigación: E2
+## 11. Hallazgos transversales para FP-181
 
-Se completaron con evidencia propia, verificada contra documentación oficial el 2026-09-16, las
-celdas que bloqueaban el escenario multinube. **E2 pasa de 1 a 4 pares puntuados:**
+**La dependencia es el criterio que la industria no documenta.** De los 25 productos, **21 no
+documentan sus dependencias propietarias ni un camino de salida** (D2, 84% sin evidencia). Le siguen
+la accesibilidad por rol (AD1, 72%) y la comparación contextual de precio (P2, 60%). En el extremo
+opuesto, la consolidación multinube (M1) solo tiene un 4% sin evidencia. Que ningún proveedor
+comercial explique cómo dejarlo es un resultado del estudio, no una falla de la investigación.
 
-| Producto | S línea base | S sensibilidad | Banda |
-|---|---:|---:|---|
-| Vantage | 66,67 | 66,67 | Solid |
-| nOps | 59,52 | 58,84 | Solid |
-| CloudZero | 57,14 | 58,44 | Solid |
-| CloudHealth | 54,76 | 55,14 | Solid |
+Los dos únicos productos con D2 puntuado son **Kubecost** (respaldo de ETL descargable al disco del
+cliente, desinstalación por borrado de namespace) y **AWS Pricing Calculator** (declara dónde se
+guardan las estimaciones, exige reconocimiento antes de compartir, fija vigencia de un año y ofrece
+API de borrado). Ambos casos comparten el rasgo de ser autoalojados o de alcance acotado.
 
-Detalle celda por celda, con cita y fuente, en `investigacion-e2.md`.
+**Diferencia documentada entre los tres grandes proveedores en reparto de costo compartido.** AWS
+tiene split charge rules con métodos proporcional, fijo y equitativo; Azure tiene cost allocation
+rules con distribución pareja o proporcional al costo total o de cómputo; **Google Cloud Billing no
+tiene una regla nativa equivalente** y su documentación lo reconoce: «billing reports can't
+granularly attribute usage to individual tenants», recomendando resolverlo por proceso interno de la
+organización.
 
-**Limitación importante para FP-181:** Precio es uno de los dos criterios críticos de E2, y en
-CloudHealth, CloudZero y Vantage queda **sin evidencia** (P1 y P2 en `NE`). Solo nOps tiene el
-criterio evaluado. La comparación de E2 es válida en visibilidad, asignación, multinube,
-integración y adopción, pero **no permite todavía afirmar nada sobre precio**, que es justamente uno
-de los dos ejes que E2 declara centrales. Cerrarlo requiere 6 celdas más (P1 y P2 en los tres
-productos).
+**Los escenarios discriminan por quién puntúa, no por la nota.** Las plataformas multinube obtienen
+el mismo puntaje en E1, E2 y E5, porque su capacidad no cambia según el escenario. Lo que cambia es
+quién alcanza el umbral: en E2 las nativas no llegan, porque FP-177 las admite solo «para la parte
+de su proveedor». FP-181 debe anticipar esta lectura para que no se confunda con una replicación de
+valores.
 
-**Finout quedó sin desbloquear.** Recibió dos de las tres celdas que necesitaba (V2 y AD2), pero su
-tercer criterio más barato era Dependencia y no existe documentación oficial de dependencias
-propietarias ni de camino de salida. La ruta alternativa —Automatización, vía CostGuard— tampoco
-pudo cerrarse: la documentación describe generación de recomendaciones, pero no ejecución ni bloqueo
-de acciones. Ninguna de las dos se rellenó con un valor inventado.
+## 12. Qué queda pendiente
+
+- **Ratificación del equipo** de las cuatro decisiones de `propuesta-metodologica-fp-180.md`, que
+  hoy están resueltas por el responsable de FP-51 y aplicadas.
+- **55 pares sin puntaje**, con el motivo registrado celda por celda. Los más cercanos al umbral son
+  Cast AI en E3 y varias alternativas que necesitan entre una y tres celdas.
+- **Cloudability sigue bloqueada** por el error 403 de IBM Docs; toda su evidencia es comercial y por
+  regla ningún indicador supera 1.
