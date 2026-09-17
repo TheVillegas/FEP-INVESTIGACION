@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "info_mds/P1/Tak et al. - 2017 - Resource Accounting of Shared IT Resources in Multi-Tenant Clouds.md",
+                "file": "FP-49/Roles y participacion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Tak et al. - 2017 - Resource Accounting of Shared IT Resources in Multi-Tenant Clouds"
+              "title": "Roles y participacion"
             }
           }
         ]
@@ -190,11 +190,21 @@
   },
   "active": "fc3cda7cafbcc912",
   "lastOpenFiles": [
-    "info_mds/P1/Turkkan et al. - Agentic Solutions for IT Financial Operations.md",
-    "info_mds/P1/Tak et al. - 2017 - Resource Accounting of Shared IT Resources in Multi-Tenant Clouds.md",
-    "info_mds/P1/Manurung y Aji - 2026 - Evaluating the Implementation of the FinOps Framework for Cloud Infrastructure Cost Management A Ca.md",
-    "info_mds/INDEX.md",
+    "FP-49/Asignacion de costos.md",
+    "FP-49/Las fases de FinOps.md",
+    "FP-49/Roles y participacion.md",
+    "docs/research-log/2026-09-16-fp-168-roles-y-areas-finops.md",
     "info_mds/_trazabilidad/research-log.md",
+    "docs/research-log",
+    "Pasted image 20260916182935.png",
+    "info_mds/P1/Manurung y Aji - 2026 - Evaluating the Implementation of the FinOps Framework for Cloud Infrastructure Cost Management A Ca.md",
+    "FP-49",
+    "reglas/engram/engram-cloud-fep-access.md",
+    "reglas/engram/README.md",
+    "reglas/engram/onboarding-engram-cloud-windows.md",
+    "info_mds/P1/Tak et al. - 2017 - Resource Accounting of Shared IT Resources in Multi-Tenant Clouds.md",
+    "info_mds/P1/Turkkan et al. - Agentic Solutions for IT Financial Operations.md",
+    "info_mds/INDEX.md",
     "info_mds/FUERA-DE-ALCANCE/Tivive et al. - 2015 - A Subspace Projection Approach for Wall Clutter Mitigation in Through-the-Wall Radar Imaging.md",
     "info_mds/P3/Aad et al. - 2025 - Total Cost of Ownership and Evaluation of Google Cloud Resources for the ATLAS Experiment at the LHC.md",
     "info_mds/P3/Schniederjans y Hales - 2016 - Cloud computing and its impact on economic and environmental performance A transaction cost economi.md",
@@ -215,13 +225,6 @@
     "docs/info/papers/Yoon et al. - 2025 - Design of Experiments-Based Adaptive Scheduling in Kubernetes for Performance and Cost Optimization.md",
     "docs/info/papers/Turkkan et al. - Agentic Solutions for IT Financial Operations.md",
     "docs/info/papers/Tivive et al. - 2015 - A Subspace Projection Approach for Wall Clutter Mitigation in Through-the-Wall Radar Imaging.md",
-    "docs/info/papers/Tak et al. - 2017 - Resource Accounting of Shared IT Resources in Multi-Tenant Clouds.md",
-    "docs/info/papers/Schniederjans y Hales - 2016 - Cloud computing and its impact on economic and environmental performance A transaction cost economi.md",
-    "docs/info/papers/Misra y Mondal - 2011 - Identification of a company’s suitability for the adoption of cloud computing and modelling its corr.md",
-    "docs/info/papers/Megahed et al. - 2019 - Optimizing cloud solutioning design.md",
-    "docs/info/papers/Manurung y Aji - 2026 - Evaluating the Implementation of the FinOps Framework for Cloud Infrastructure Cost Management A Ca.md",
-    "docs/info/papers/Fragiadakis et al. - 2024 - Cloud PricingOps A Decision Support Framework to Explore Pricing Policies of Cloud Services.md",
-    "docs/info/papers/Feitosa et al. - 2024 - Mining for cost awareness in the infrastructure as code artifacts of cloud-based applications An ex.md",
     "docs/info/papers",
     "docs/TINV_Matriz_de_Fuentes_final_2026-09-13.xlsm - Matriz de Fuentes.csv"
   ]
