@@ -5,11 +5,11 @@ La FinOps Foundation organiza la práctica de FinOps en tres fases: **Informar, 
 > **Estado:** Documento de información verificada. El alcance es conceptual: no contiene datos aplicados, resultados medidos ni validación experimental del proyecto.
 
 1. **Informar**: comprender el consumo y los costos
-    
+
     La fase Informar tiene como propósito proporcionar visibilidad sobre el uso de los recursos tecnológicos y sus costos asociados. Para ello, se recopilan, organizan y analizan datos que permitan identificar qué recursos se consumen, cuánto cuestan y a qué equipos, productos o actividades corresponden [1].
-    
+
     En un entorno cloud, esta información permite distribuir los costos entre responsables y relacionar el gasto con el funcionamiento de los servicios. También proporciona una base para elaborar presupuestos, realizar previsiones y analizar indicadores de costo unitario. El resultado de esta fase es una visión compartida que permite a ingeniería, finanzas y la organización tomar decisiones fundamentadas [1].
-    
+
     Como el consumo de la nube puede variar, la información sobre costos y uso debe revisarse periódicamente para identificar cambios y orientar las decisiones [1].
 
 2. **Optimizar**: identificar y priorizar mejoras
@@ -26,7 +26,7 @@ La FinOps Foundation organiza la práctica de FinOps en tres fases: **Informar, 
 
 ## Referencias
 
-[1] FinOps Foundation. FinOps Phases. [https://www.finops.org/framework/phases/](https://www.finops.org/framework/phases/)  
-[2] FinOps Foundation. FinOps Principles. [https://www.finops.org/framework/principles/](https://www.finops.org/framework/principles/)  
+[1] FinOps Foundation. FinOps Phases. [https://www.finops.org/framework/phases/](https://www.finops.org/framework/phases/)
 
+[2] FinOps Foundation. FinOps Principles. [https://www.finops.org/framework/principles/](https://www.finops.org/framework/principles/)
 
