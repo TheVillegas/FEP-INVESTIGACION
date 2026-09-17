@@ -1,38 +1,88 @@
-# FP-180 — Propuesta metodológica para confirmación del equipo
+# FP-180 — Decisiones metodológicas
 
-> **Estado:** Propuesta. Las tres decisiones de esta página **no están confirmadas por consenso del
-> equipo**; se aplicaron a la matriz para poder cuantificar su efecto y quedan sujetas a revisión.
+> **Estado:** Las cuatro decisiones de esta página fueron **resueltas por el responsable de
+> FP-51 el 2026-09-17** y están aplicadas a la matriz. Quedan a **ratificación del equipo**, que
+> es el nivel de confirmación que FP-177 declara para sus propios artefactos.
 > Documento estructurado con asistencia de IA.
 
 ## Por qué existe este documento
 
-Cada artefacto de FP-177 cierra declarando qué fue **confirmado por consenso del equipo**: los
-criterios, la escala, los pesos y los conjuntos críticos. Esa declaración es trazabilidad de quién
-decidió qué, y la jerarquía de evidencia de FP-177 §2.1 define qué fuentes son admisibles.
+Cada artefacto de FP-177 cierra declarando qué fue **confirmado por consenso del equipo**. Esa
+declaración es trazabilidad de quién decidió qué, y la jerarquía de evidencia de FP-177 §2.1 define
+qué fuentes son admisibles.
 
-La auditoría de la matriz de FP-180 encontró dos defectos de fondo cuya corrección exigió resolver
-situaciones que FP-177 **no cubre explícitamente**. Resolverlas es inevitable —sin una regla, la
-matriz no se puede calcular—, pero la regla elegida no puede quedar respaldada por el criterio de
-quien ejecutó la corrección. Este documento expone cada decisión con su fundamento y su efecto
-numérico, para que el equipo la confirme, la modifique o la rechace por escrito.
+La auditoría y el completado de la matriz de FP-180 obligaron a resolver cuatro situaciones que
+FP-177 **no cubre explícitamente**. Resolverlas era inevitable: sin una regla, la matriz no se puede
+calcular ni poblar. Pero la regla elegida no podía quedar respaldada por el criterio de quien
+ejecutó el trabajo, y por eso se documentaron aquí con su fundamento y su efecto medido antes de
+aplicarse.
 
-Los defectos corregidos están descritos en `estado-matriz-comparativa.md` §7 y §8; el detalle celda
-por celda, en `correcciones-aplicadas.md` y `celdas-heredadas.md`.
+Los defectos corregidos y las pasadas de investigación están descritos en
+`estado-matriz-comparativa.md`; el detalle celda por celda, en los informes de cada pasada.
+
+**Una decisión anterior fue retirada.** Durante la corrección se usó una convención llamada
+«escenario ancla»: la evidencia de un producto valía solo en el escenario donde su categoría es
+actor principal. Era un atajo para no rehacer la investigación por escenario. Al levantarse la
+restricción de plazo, se abandonó y se hizo el trabajo que FP-177 §1 pide: evidencia propia por par
+producto × escenario. Ya no forma parte de la metodología aplicada.
 
 ---
 
-## Decisión 1 — Productos separados, no suites por proveedor
+## Decisión 1 — Un criterio crítico sin evidencia deja al par sin banda
 
 ### El vacío
 
-FP-177 §2.2 define `0` como ausencia verificada y `NA` como no aplicable, pero no resuelve el caso de
-un producto que verificadamente no cumple una función **porque otro producto del mismo proveedor la
-cumple**. La matriz de indicadores agrega una columna de «prevención de doble conteo», que puede
-leerse como respaldo para excluir esas funciones del producto angosto.
+FP-177 §5 fija dos criterios críticos por escenario con exigencia `C_c ≥ 1` y dice que «un
+incumplimiento crítico se informa junto al puntaje y no se oculta con la media». Eso regula un
+criterio **medido y reprobado**. No dice nada sobre un criterio crítico que **nunca se midió**.
 
-La primera pasada aplicó esa lectura: marcó `NA` los indicadores de Visibilidad, Asignación, Precio y
-Dependencia de AWS Cost Optimization Hub y de Google Cloud FinOps Hub, con la justificación «esa
-función corresponde a Cost Explorer / Cloud Billing».
+### Lo decidido
+
+Un criterio crítico que aplica y quedó sin evidencia **retira la banda comparativa del par**. El
+puntaje se conserva y se informa, pero el par no recibe banda ni entra en la recomendación de ese
+escenario.
+
+Un criterio crítico marcado `NA` **no cuenta** para esta regla: `NA` significa que el escenario no
+se lo exige a ese producto —como hace FP-177 §4 con las nativas en E2, admitidas solo «para la
+parte de su proveedor»— y eso es un alcance declarado, no un hueco de evidencia.
+
+### Fundamento
+
+Es la única salida coherente con el resto de la metodología. Revisados todos los mecanismos de
+FP-177 que tratan la ausencia, el patrón es constante: **cuando no se puede verificar algo, se
+retira la conclusión; nunca se inventa una penalización**.
+
+| Situación | Qué hace FP-177 |
+|---|---|
+| Indicador sin evidencia | Sale del cálculo y reduce cobertura; **no se convierte en cero** |
+| Criterio con un indicador en `NE` | Deja de estar evidenciado y pierde su peso en la cobertura |
+| Cobertura bajo 70% | *Insufficient evidence* y **no recibe banda comparativa** |
+| Indicador `NA` | Sale y renormaliza «para no atribuir valor a lo desconocido» |
+| Evidencia solo comercial | Tope de 1: limita, no anula |
+| Cobertura frente a banda | «La condición de cobertura prevalece sobre cualquier banda» |
+
+La última fila es casi el mismo caso: ya existe un mecanismo donde una condición de verificación
+anula la banda sin tocar el puntaje. Tratar el crítico sin evidencia como incumplimiento sería
+convertir `NE` en `0`, que la metodología prohíbe; dejar la banda intacta sería atribuir valor a lo
+desconocido, que la renormalización busca evitar.
+
+### Efecto verificado
+
+En E6, Azure Cost Management (47,62) y Google Cloud Billing (30,95) alcanzaban cobertura suficiente
+**sin tener evaluados Visibilidad ni Integración, los dos criterios críticos de ese escenario**.
+Ambos pasan a «Sin banda (crítico sin evidencia)», conservando su puntaje. E6 queda con dos
+productos recomendables: Vantage y AWS Cost Explorer, que sí tienen verificado el componente de red.
+
+---
+
+## Decisión 2 — Productos separados, no suites por proveedor
+
+### El vacío
+
+FP-177 §2.2 define `0` como ausencia verificada y `NA` como no aplicable, pero no resuelve el caso
+de un producto que verificadamente no cumple una función **porque otro producto del mismo proveedor
+la cumple**. La matriz de indicadores incluye una columna de «prevención de doble conteo», que puede
+leerse como respaldo para excluir esas funciones del producto angosto.
 
 ### Lo decidido
 
@@ -41,160 +91,131 @@ verificadamente no cumple se puntúa `0`, aunque exista en otro producto del mis
 
 ### Fundamento
 
-`docs/fp-177/escenarios-uso-y-poblacion-evaluada-borrador.md` §2 establece que «la agrupación se
-conserva **exactamente** según la decisión de alcance de FP-51» y enumera los cinco productos cloud
-nativos como entradas individuales. La ficha de FP-51 los nombra igual, y FP-177 §1 fija la unidad de
+`escenarios-uso-y-poblacion-evaluada-borrador.md` §2 establece que «la agrupación se conserva
+**exactamente** según la decisión de alcance de FP-51» y enumera los cinco productos cloud nativos
+como entradas individuales. La ficha de FP-51 los nombra igual, y FP-177 §1 fija la unidad de
 resultado en producto × escenario.
 
-FP-177 no discute el caso de la suite: no lo rechazó, no lo consideró. La decisión no se apoya en una
-prohibición, sino en no apartarse del alcance acordado.
-
-La prevención de doble conteo de la matriz opera **entre indicadores** de una misma evaluación («una
-integración no prueba adopción»), no entre productos distintos de la población.
+FP-177 no discute el caso de la suite: no lo rechazó, no lo consideró. La decisión no se apoya en
+una prohibición, sino en no apartarse del alcance acordado. La prevención de doble conteo opera
+**entre indicadores** de una misma evaluación, no entre productos distintos de la población.
 
 ### Efecto verificado
 
-Mismo producto, misma evidencia, solo cambiando `NA` por `0`: AWS Cost Optimization Hub pasa de
-**66,67 (Solid)** a **19,05 (Basic)**. Con `NA`, el peso de Visibilidad y Asignación —22% del total—
-se repartía entre los criterios donde el producto sí puntúa, y quedaba por encima de AWS Cost
-Explorer (51,85), que sí cubre ambos.
+AWS Cost Optimization Hub pasa de **66,67 (Solid)** a **19,05 (Basic)**. Con `NA`, el peso de
+Visibilidad y Asignación —22% del total— se repartía entre los criterios donde el producto sí
+puntúa, y quedaba por encima de AWS Cost Explorer (51,85), que sí cubre ambos.
 
-Comparación en E1 bajo cada opción:
+### Inconsistencia que obliga a declarar
 
-| Productos separados (decidido) | S | Suites por proveedor (descartada) | S |
-|---|---:|---|---:|
-| AWS Cost Explorer | 51,85 | AWS (suite) | 55,56 |
-| Azure Cost Management | 51,85 | Azure Cost Management | 51,85 |
-| Google Cloud Billing | 38,89 ⚠ | Google Cloud (suite) | 48,15 ⚠ |
-| Google Cloud FinOps Hub | 23,81 ⚠ | | |
-| AWS Cost Optimization Hub | 19,05 ⚠ | | |
-
-⚠ incumple un criterio crítico de E1.
+**FP-126 registra tres herramientas nativas, no cinco**: trata a AWS y a Google como un producto
+cada uno. FP-51 y FP-177 las separan. Son dos artefactos del proyecto con poblaciones distintas, y
+la diferencia debe quedar declarada en el informe aunque la decisión se sostenga en FP-51 y FP-177,
+que son los que definen la población de la comparación.
 
 ### Limitación que obliga a declarar
 
-Con productos separados, E1 muestra tres incumplimientos críticos de cinco productos, y **dos de
-ellos no son un juicio sobre el proveedor**: AWS Cost Optimization Hub y Google Cloud FinOps Hub son
-componentes de optimización evaluados en un escenario de visibilidad y asignación. FP-181 debe
-declararlo explícitamente para que el informe no induzca la lectura de que AWS o Google ofrecen un
-producto deficiente.
+Con productos separados, E1 muestra incumplimientos críticos en AWS Cost Optimization Hub y Google
+Cloud FinOps Hub que **no son un juicio sobre el proveedor**: son componentes de optimización
+evaluados en un escenario de visibilidad y asignación. FP-181 debe decirlo explícitamente.
 
 ---
 
-## Decisión 2 — Escenario ancla por categoría
+## Decisión 3 — La evidencia de un escenario puede subsumir a otro, declarándolo
 
 ### El vacío
 
-La evidencia de la matriz se recogió **describiendo el producto en general, no un escenario**: por eso
-fue replicable a todos sus escenarios. Se verificó que cada producto tiene exactamente el mismo
-número de celdas puntuadas en todos sus escenarios (AWS Cost Explorer: 18 en E1, E2, E3, E5 y E6), de
-modo que **no es posible inferir desde el libro en qué escenario se investigó cada valor**.
-
-Como FP-177 §1 exige evidencia propia de las entradas de cada escenario, hubo que decidir en cuál de
-ellos esa evidencia general se considera válida.
+Al abandonar el escenario ancla había que decidir si la evidencia recogida para un escenario sostiene
+el valor de un indicador en otro. FP-177 exige entradas propias del escenario, pero no dice qué
+ocurre cuando una capacidad documentada para un contexto **incluye lógicamente** al otro.
 
 ### Lo decidido
 
-Cada producto conserva sus valores en el escenario donde FP-177 §4 sitúa a su categoría como actor
-principal, y pasa a `NE` en los demás:
+Una capacidad documentada para un escenario más exigente sostiene el valor en uno menos exigente,
+**siempre que el argumento de inclusión se registre en la celda**. No es copiar un valor: es
+declarar por qué la evidencia citada alcanza.
 
-| Categoría | Escenario ancla |
-|---|---|
-| Herramientas cloud nativas | E1 |
-| Plataformas multicloud | E2 |
-| Herramientas de Kubernetes | E3 |
-| Estimación temprana / políticas | E4 |
+El caso típico: una plataforma que consolida y desglosa costo entre varios proveedores (E2)
+necesariamente lo hace para uno solo (E1). Donde la capacidad no subsume, la celda no se toca. Por
+eso la evidencia de E2 **no** se trasladó a E3: consolidar proveedores no dice nada sobre leer un
+clúster, y por eso CloudZero se evaluó en E3 contra su documentación de Kubernetes.
 
 ### Fundamento
 
-Es una **convención declarada, no un hallazgo**. No se descubrió dónde se investigó cada valor: se
-eligió dónde considerarlo válido, y se eligió el escenario en que cada categoría es el actor
-principal del diseño de escenarios de FP-177 §4.
+Es el método que reemplazó al atajo del ancla, y se apoya en que la unidad de FP-177 es producto ×
+escenario: lo que se evalúa es la capacidad del producto frente a las entradas del escenario, y una
+capacidad mayor cubre una menor del mismo tipo. La diferencia con el ancla es que aquí hay un
+argumento explícito y auditable por celda, no una convención general.
 
-Se probó una alternativa —anclar por producto, en el escenario con más celdas puntuadas— y no
-discrimina: al ser réplicas exactas, todos los escenarios de un producto empatan. La prueba es
-circular y no aporta criterio.
+### Alcance
 
-### Efecto verificado
-
-No cambia cuántos pares puntúan (9 en cualquier variante), sino **en qué escenario aparece el único
-puntaje de cada producto**. Con esta convención, nOps puntúa en E2; si el ancla de multicloud fuera
-E1, nOps puntuaría en E1 y E2 quedaría sin ningún par evaluable.
-
-### Qué necesita el equipo verificar
-
-Si quien ejecutó la investigación recuerda haber tenido un escenario concreto en mente para alguna
-categoría, ese escenario debe reemplazar al ancla propuesta para esa categoría.
+Sostiene la mayor parte de los pares poblados. Si se rechaza, esas celdas vuelven a `NE`.
 
 ---
 
-## Decisión 3 — Nueve indicadores dependientes del escenario
+## Decisión 4 — Cada escenario tiene indicadores que no admiten subsunción
 
 ### El vacío
 
-FP-177 no clasifica sus indicadores en dependientes e independientes del escenario. Para marcar los
-valores heredados hubo que establecer esa clasificación.
+Corolario de la anterior: si la evidencia puede subsumir, hay que definir qué **nunca** puede
+hacerlo, para que ningún escenario quede satisfecho por capacidades verificadas para otro.
 
 ### Lo decidido
 
-Se consideran dependientes del escenario nueve indicadores: **V1, A1, A2, O1, AU1, I1, I2, AD1 y
-P2**. Los otros nueve —V2, O2, AU2, M1, M2, AD2, P1, D1, D2— describen propiedades del producto y
-conservan su valor en todos los escenarios.
+En cada escenario, los indicadores que expresan lo que ese escenario evalúa se puntúan **solo con
+evidencia propia**:
+
+| Escenario | Exige evidencia propia | Por qué |
+|---|---|---|
+| E1 | A1 | Sus salidas incluyen el gasto no asignado y el showback, que ningún otro escenario pide |
+| E2 | P1 y P2 | Precio es criterio crítico y estaba sin evaluar en tres de cuatro plataformas |
+| E5 | A2 | La regla de reparto del costo compartido es lo que define la atribución multi-tenant |
+| E6 | V1 e I1 | El costo de red por flujo distingue al escenario y son sus dos críticos |
+
+En E6 se aplicó la forma más estricta: sin evidencia propia sobre costo de red, esos indicadores
+quedan en `NE` aunque el producto tenga desglose documentado en otro lado. Es lo que dejó a Azure y
+a Google Cloud Billing sin sus críticos evaluados, y lo que la decisión 1 convierte en «sin banda».
 
 ### Fundamento
 
-Cuatro se clasifican por el **texto literal** de su pregunta observable en la matriz de FP-177:
-
-| Indicador | Texto que nombra el escenario |
-|---|---|
-| O1 | detecta desperdicio «relevante al escenario» |
-| I1 | integra «los datos requeridos … del escenario» |
-| I2 | se integra con «el flujo de trabajo relevante» |
-| AD1 | soporta acceso «para los roles del escenario» |
-
-Los otros cinco se clasifican **por criterio**, no por texto literal:
-
-| Indicador | Razón |
-|---|---|
-| V1 | La unidad de desglose cambia: cuenta/proyecto en E1, namespace en E3, entidad en E5 |
-| A1 | La entidad de asignación es la del escenario |
-| A2 | Las reglas de reparto compartido son centrales en E5 y marginales en E1 |
-| AU1 | Las acciones de costo controladas son las del escenario |
-| P2 | La estimación o comparación es contextual al escenario |
-
-### Efecto verificado
-
-**Ninguno sobre los resultados.** Se probaron tres variantes y las tres dan 9 pares calculables de 60:
-
-| Indicadores dependientes | Pares calculables | Celdas a investigar |
-|---|---:|---:|
-| Solo los 4 literales | 9 | 157 |
-| Los 9 (decidido) | 9 | 338 |
-| Los 18 | 9 | 599 |
-
-La razón es que basta un indicador en `NE` para que su criterio completo deje de estar evidenciado:
-con los 4 literales ya caen Optimización, Integración y Adopción, y la cobertura baja del 70% igual.
-
-La decisión no afecta ningún puntaje del informe; afecta **el tamaño declarado del trabajo
-pendiente**. Se eligieron los nueve porque, cuando se investiguen E5 y E6, V1 y A1 sí variarán por
-escenario, y conservarlos replicados reintroduciría el defecto corregido.
+Sin esta restricción, la subsunción de la decisión 3 vaciaría de sentido a los escenarios: cualquier
+producto con capacidades generales documentadas quedaría evaluado en todos. La combinación de ambas
+decisiones preserva la unidad producto × escenario: lo común se subsume con argumento, lo propio se
+investiga.
 
 ---
 
-## Punto abierto que FP-181 debe resolver
+## Aplicación de la condición de elegibilidad de E4
 
-FP-177 §5 obliga a informar el incumplimiento de un criterio crítico junto al puntaje, pero **no
-define si descalifica al producto para ese escenario**. Se propone que un incumplimiento crítico
-impida recomendar ese producto para ese escenario, cualquiera sea su puntaje; de lo contrario el
-conjunto de criterios críticos no cumple ninguna función. Requiere confirmación del equipo.
+La condición de elegibilidad de E4 —nativas «cuando soporten estimación previa»— habilitaba un caso
+que la matriz no cubría: **IBM Cloud Cost Estimator cumple esa condición y no estaba evaluado en
+E4**. Toda su evidencia describe estimación previa al despliegue, es decir corresponde a E4 y no a
+E1, donde figuraba únicamente por pertenecer a la categoría nativa.
+
+Se aplicó el 2026-09-17. El producto **no se reclasifica**: sigue siendo cloud nativa y ahora
+también se evalúa donde FP-177 lo admite. Sus indicadores sin objeto antes del despliegue pasan a
+`NA`, con el mismo criterio ya aplicado a Infracost y a las calculadoras de AWS y Azure.
+
+Eso resuelve la tensión registrada en `alternativas-adicionales.md` sin tocar la población acordada:
+el producto no estaba mal categorizado, estaba evaluado en el escenario equivocado. Entra con
+**38,89 (Basic)** y cobertura 75%, cumpliendo los dos criterios críticos de E4, y deja el escenario
+con las tres calculadoras nativas de estimación previa —AWS, Azure e IBM— comparables entre sí.
+
+La decisión no requirió criterio nuevo: se deriva del texto de FP-177 §4.
 
 ---
 
-## Registro de confirmación
+## Registro de decisiones
 
-| Decisión | Estado | Confirmada por | Fecha |
+| Decisión | Estado | Resuelta por | Fecha |
 |---|---|---|---|
-| 1 — Productos separados | Propuesta | | |
-| 2 — Ancla por categoría | Propuesta | | |
-| 3 — Nueve indicadores dependientes | Propuesta | | |
-| Criterio crítico descalifica (FP-181) | Propuesta | | |
+| 1 — Crítico sin evidencia retira la banda | Aplicada | Responsable de FP-51 | 2026-09-17 |
+| 2 — Productos separados | Aplicada | Responsable de FP-51 | 2026-09-17 |
+| 3 — Subsunción declarada entre escenarios | Aplicada | Responsable de FP-51 | 2026-09-17 |
+| 4 — Indicadores con evidencia propia por escenario | Aplicada | Responsable de FP-51 | 2026-09-17 |
+| Escenario ancla | **Retirada**; reemplazada por las decisiones 3 y 4 | Responsable de FP-51 | 2026-09-17 |
+| IBM Cloud Cost Estimator en E4 | Aplicada; derivada del texto de FP-177 §4 | Responsable de FP-51 | 2026-09-17 |
+
+| Ratificación del equipo | Estado | Confirmada por | Fecha |
+|---|---|---|---|
+| Decisiones 1 a 4 | Pendiente | | |

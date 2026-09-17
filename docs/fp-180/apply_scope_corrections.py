@@ -198,16 +198,35 @@ def evaluate(indicators: dict[str, list], weights: dict[str, float]) -> dict:
     w_applicable = sum(weights[c] for c in applicable)
     if not w_applicable:
         return {"coverage": 0.0, "score": None, "band": "Sin criterios aplicables",
-                "means": means}
+                "means": means, "applicable": applicable}
 
     coverage = 100.0 * sum(weights[c] for c in evidenced) / w_applicable
     if coverage < 70.0:
         return {"coverage": coverage, "score": None, "band": "Insufficient evidence",
-                "means": means}
+                "means": means, "applicable": applicable}
 
     w_evidenced = sum(weights[c] for c in evidenced)
     score = sum(100.0 * weights[c] / w_evidenced * means[c] / 3.0 for c in evidenced)
-    return {"coverage": coverage, "score": score, "band": band(score), "means": means}
+    return {"coverage": coverage, "score": score, "band": band(score), "means": means,
+            "applicable": applicable}
+
+
+def unevidenced_critical(scenario: str, result: dict) -> list[str]:
+    """Critical criteria of the scenario that apply but were never evidenced.
+
+    Team decision of 2026-09-17: a critical criterion left without evidence
+    removes the comparative band, exactly as insufficient coverage does. The pair
+    keeps its score but cannot be placed in the scenario or carried into a
+    recommendation, because the criterion that defines the scenario was never
+    verified.
+
+    A critical criterion marked NA does not count here: NA means the scenario
+    itself does not require it of that product — as FP-177 section 4 does for
+    native tools in E2, admitted only "para la parte de su proveedor" — which is
+    a declared scope, not a gap in the evidence.
+    """
+    return [c for c in CRITICAL.get(scenario, [])
+            if c in result.get("applicable", []) and c not in result["means"]]
 
 
 def read_scores(sheet) -> tuple[dict, list]:
@@ -265,16 +284,26 @@ def write_results_sheet(workbook, pairs) -> None:
         sens = evaluate(indicators, SENS_W)
         failed = [c for c in CRITICAL.get(scenario, [])
                   if c in base["means"] and base["means"][c] < 1]
-        absent = [c for c in CRITICAL.get(scenario, []) if c not in base["means"]]
-        flag = ", ".join(failed)
-        if absent:
-            flag += (" | " if flag else "") + "sin criterio evaluable: " + ", ".join(absent)
+        unevidenced = unevidenced_critical(scenario, base)
+
+        flag = ", ".join(f"{c} incumplido" for c in failed)
+        if unevidenced:
+            flag += (" | " if flag else "") + \
+                "sin evidencia: " + ", ".join(unevidenced)
+
+        # Team decision: an unevidenced critical criterion removes the band.
+        base_band, sens_band = base["band"], sens["band"]
+        if unevidenced and base["score"] is not None:
+            base_band = "Sin banda (critico sin evidencia)"
+        if unevidenced_critical(scenario, sens) and sens["score"] is not None:
+            sens_band = "Sin banda (critico sin evidencia)"
+
         sheet.append([
             scenario, category, product,
             round(base["coverage"], 2), round(sens["coverage"], 2),
             round(base["score"], 2) if base["score"] is not None else "Insufficient evidence",
             round(sens["score"], 2) if sens["score"] is not None else "Insufficient evidence",
-            base["band"], sens["band"], flag or "-",
+            base_band, sens_band, flag or "-",
         ])
     sheet.freeze_panes = "A2"
     for column, width in zip("ABCDEFGHIJ", (12, 20, 30, 18, 22, 20, 20, 22, 22, 46)):
