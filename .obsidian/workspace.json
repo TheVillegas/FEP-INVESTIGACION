@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "FP-49/Roles y participacion.md",
+                "file": "FP-49/Consolidado conceptual y preparacion de FP-171.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Roles y participacion"
+              "title": "Consolidado conceptual y preparacion de FP-171"
             }
           }
         ]
@@ -191,10 +191,12 @@
   "active": "fc3cda7cafbcc912",
   "lastOpenFiles": [
     "FP-49/Asignacion de costos.md",
-    "FP-49/Las fases de FinOps.md",
-    "FP-49/Roles y participacion.md",
-    "docs/research-log/2026-09-16-fp-168-roles-y-areas-finops.md",
+    "FP-49/Consolidado conceptual y preparacion de FP-171.md",
+    "FP-49/Economia unitaria.md",
     "info_mds/_trazabilidad/research-log.md",
+    "FP-49/Roles y participacion.md",
+    "FP-49/Las fases de FinOps.md",
+    "docs/research-log/2026-09-16-fp-168-roles-y-areas-finops.md",
     "docs/research-log",
     "Pasted image 20260916182935.png",
     "info_mds/P1/Manurung y Aji - 2026 - Evaluating the Implementation of the FinOps Framework for Cloud Infrastructure Cost Management A Ca.md",
@@ -223,8 +225,6 @@
     "info_mds/FUERA-DE-ALCANCE",
     "info_mds",
     "docs/info/papers/Yoon et al. - 2025 - Design of Experiments-Based Adaptive Scheduling in Kubernetes for Performance and Cost Optimization.md",
-    "docs/info/papers/Turkkan et al. - Agentic Solutions for IT Financial Operations.md",
-    "docs/info/papers/Tivive et al. - 2015 - A Subspace Projection Approach for Wall Clutter Mitigation in Through-the-Wall Radar Imaging.md",
     "docs/info/papers",
     "docs/TINV_Matriz_de_Fuentes_final_2026-09-13.xlsm - Matriz de Fuentes.csv"
   ]
