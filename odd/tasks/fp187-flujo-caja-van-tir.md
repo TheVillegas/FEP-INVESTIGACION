@@ -19,7 +19,7 @@ Completar la evaluación económica de TINV-06 sin duplicar el TCO ni ocultar su
 - Crear docs/fp-187/trazabilidad-fp187.md.
 
 ## Constraints
-- No inventar horas, tarifas, costos de implementación ni tasa financiera: usar parámetros visibles con valores provisionales y marcar validación humana.
+- No presentar horas, tarifas, costos de implementación ni tasa financiera como datos internos reales cuando no existen: usar proxies públicos y estimaciones de ingeniería visibles, trazables y reemplazables.
 - No duplicar costos ya incluidos en FP-183.
 - Separar gasto cloud, ahorro bruto y flujo neto.
 - El workbook debe poder recalcularse modificando los supuestos.
@@ -39,6 +39,8 @@ Completar la evaluación económica de TINV-06 sin duplicar el TCO ni ocultar su
 - [x] Hoja Auditoría sin errores de fórmula.
 - [x] Trazabilidad y limitaciones documentadas.
 - [x] Jira FP-187 actualizado con comentario 10590; el issue permanece abierto para validación humana.
+- [x] Los inputs pendientes se completan con proxies públicos verificables y una estimación de esfuerzo desglosada, claramente marcada como provisional.
+- [x] El VAN/TIR incremental descuenta implementación y operación FinOps incremental, y mantiene inversión inicial separada para evitar doble conteo.
 
 ## Applicable checks
 - Verificar fórmulas con @oai/artifact-tool.
@@ -49,9 +51,10 @@ Completar la evaluación económica de TINV-06 sin duplicar el TCO ni ocultar su
 ## Progress
 - [x] F187-01 Diseñar workbook y supuestos.
 - [x] F187-02 Autorizar operación de artefacto y construir workbook.
-- [x] F187-03 Verificar cálculos y visualización. Evidencia: `verify_fp187.mjs` reporta `errors: []`; base Chile 23,256.321466, East US 16,474.602675; ahorros FP-184 Chile 1,453.152, East US 936.48; VAN bruto 1,104.10 y 711.53; inspección visual de `resumen.png` sin defectos.
+- [x] F187-03 Verificar cálculos y visualización. Evidencia vigente: `verify_fp187.mjs` reporta `errors: []`; base Chile 23,256.321466, East US 16,474.602675; ahorros FP-184 Chile 1,453.152, East US 936.48; VAN bruto con tasa proxy 5.5%: 1,272.06 y 819.77; inspección visual de las seis hojas sin defectos materiales.
 - [x] F187-04 Documentar trazabilidad y actualizar Jira. Trazabilidad creada y comentario 10590 registrado en FP-187; no se hizo transición a Done.
+- [x] F187-05 Incorporar proxies públicos para tasa, mano de obra y tipo de cambio; documentar horas de implementación/operación y recalcular VAN/TIR neto. Evidencia: MDSF 5.5%, INE CLP 1,483,153/mes, DT 42 h/semana, BCCh CLP 954.85/USD; tarifa proxy USD 8.5345/h; implementación 50 h (USD 426.73) y operación 1 h/mes. VAN neto: Chile USD 397.07, East US -USD 55.21; TIR anual: 43.91% y -0.21%; `errors: []` y controles de Auditoría OK/PROVISIONAL.
 
 ## Next step
-Validar con el grupo la tasa financiera, inversión inicial, costos de implementación y operación; después recalcular VAN/TIR incremental antes de cerrar el issue.
+Actualizar Jira FP-187 con los proxies, resultados y fuentes; mantener la etiqueta provisional hasta que el grupo sustituya los valores por datos internos.
 
