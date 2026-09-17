@@ -3,9 +3,17 @@
 .codegraph/
 .obsidian/
 
-# Python
+# Generated working artifacts
+.codex-work/
+.tmp-*/
+*.inspect.ndjson
 __pycache__/
+*.pyc
 *.py[cod]
+/outputs/
 
 # Spreadsheet backups written by the FP-180 correction scripts
 *.xlsx.bak
+
+# Local preview images
+/docs/fp-184/*.png

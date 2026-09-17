@@ -1,30 +1,22 @@
-# FP-183 — Documentación inicial de TCO Azure Container Apps
+# FP-183 — Modelo TCO regional
 
-FP-183 prepara el modelo reproducible de costo total de propiedad (TCO) a cinco años (60 meses) para **una arquitectura idéntica** de Azure Container Apps en **Chile Central** y **East US**. Es una subtarea de **FP-52**.
+FP-183 contiene un modelo mensual de 60 meses para la arquitectura ilustrativa definida en FP-182 y compara Chile Central con East US.
 
-No asigna precios, volúmenes ni supuestos: esos datos son dependencia obligatoria de FP-182.
+## Artefactos
 
-## Relación de trabajo
-
-| Ítem | Rol |
+| Archivo | Propósito |
 |---|---|
-| FP-52 | Iniciativa padre |
-| FP-183 | Diseño documental y modelo TCO regional comparable |
-| FP-182 | Dependencia dura: contrato de arquitectura y supuestos de entrada |
+| `modelo-tco-linea-base-5-anos.xlsx` | Supuestos, 36 líneas regionales, precios/fuentes y controles. |
+| `contrato-de-entrada-fp-182.md` | Estado de los insumos recibidos desde FP-182. |
+| `diseno-planilla-tco.md` | Diseño efectivo del workbook de cinco hojas. |
+| `plantilla-tco-fp-183-v1.xlsx` | Plantilla histórica previa; no usar para resultados ni cifras vigentes. |
 
-## Mapa de artefactos
+## Estado
 
-| Artefacto | Propósito |
-|---|---|
-| [Contrato de entrada FP-182](contrato-de-entrada-fp-182.md) | Campos, unidades y validaciones que FP-182 debe entregar. |
-| [Diseño de planilla TCO](diseno-planilla-tco.md) | Hojas y comportamiento de fórmulas propuestos, sin valores. |
+- **Gasto cloud comparable:** calculable y conciliado para 60 meses.
+- **Chile Central:** USD 23.256,32.
+- **East US:** USD 16.474,60.
+- **TCO económico completo:** pendiente de horas y tarifa de operación.
+- **Validación humana:** pendiente para supuestos, SLA, contrato, impuestos y decisión final.
 
-## Estado actual
-
-- **Dependencia FP-182:** pendiente de insumos validados.
-- **Modelo TCO:** no calculable hasta completar y validar el contrato de entrada.
-- **Alcance actual:** documentación; no modifica planillas ni fuentes de precios.
-
-## Próximo paso
-
-Completar el contrato con los valores aprobados por FP-182 y sus fuentes oficiales; luego cargar el catálogo de precios por región y calcular los 60 meses.
+Los vacíos no se interpretan como cero. Las categorías excluidas tienen justificación explícita y el esfuerzo operativo permanece pendiente.
