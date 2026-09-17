@@ -57,4 +57,3 @@ Completar la evaluación económica de TINV-06 sin duplicar el TCO ni ocultar su
 
 ## Next step
 Actualizar Jira FP-187 con los proxies, resultados y fuentes; mantener la etiqueta provisional hasta que el grupo sustituya los valores por datos internos.
-
