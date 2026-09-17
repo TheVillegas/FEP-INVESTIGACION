@@ -4,8 +4,8 @@
 
 ## Documentos y conexión
 
-- **FP-170:** [[Asignacion de costos]] — propiedad del gasto, metadatos, reparto, cobertura y efecto financiero.
-- **FP-169:** [[Economia unitaria]] — costo por transacción, cliente, solicitud y token, con alcance y poblaciones explícitos.
+- **FP-170:** [[fp-170 Asignacion de costos]] — propiedad del gasto, metadatos, reparto, cobertura y efecto financiero.
+- **FP-169:** [[fp-169 Economia unitaria]] — costo por transacción, cliente, solicitud y token, con alcance y poblaciones explícitos.
 
 La relación que debe conservarse es **asignación → costo asignado → costo unitario**: las reglas atribuyen gasto a un ámbito; ese costo constituye el numerador que se relaciona con su actividad durante el mismo periodo. El *showback* comunica la atribución y el *chargeback* la incorpora formalmente al presupuesto o contabilidad; ninguno reemplaza el cálculo de economía unitaria. Esta secuencia orienta el futuro mapa, pero no constituye su entrega completa.
 
@@ -48,4 +48,4 @@ FP-171 requiere **un glosario consistente y sustentado en fuentes, además de un
 
 [D] FinOps Foundation. *GenAI FinOps: How Token Pricing Really Works*. https://www.finops.org/wg/genai-finops-how-token-pricing-really-works/. Sin fila independiente en el CSV consultado.
 
-Consulta: 2026-09-17. Trazabilidad por tarea: [[../info_mds/_trazabilidad/research-log|Bitácora de investigación]], registros 10 y 11. La referencia académica de Tak et al. en FP-170 se conserva como antecedente, sin una nueva revisión del artículo en esta intervención.
+Consulta: 2026-09-17. Trazabilidad por tarea: [[../papers/info_mds/_trazabilidad/research-log|Bitácora de investigación]], registros 10 y 11. La referencia académica de Tak et al. en FP-170 se conserva como antecedente, sin una nueva revisión del artículo en esta intervención.

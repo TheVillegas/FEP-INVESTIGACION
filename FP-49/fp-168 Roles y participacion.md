@@ -1,10 +1,12 @@
 # Core Personas
 
-Las *Core Personas* son los grupos principales que participan directamente en las decisiones FinOps y en la responsabilidad compartida sobre el valor del uso tecnológico [1]. En este documento están representadas por Ingeniería, Finanzas, Adquisiciones, Producto/Negocio, profesionales de FinOps y Liderazgo. 
+> **Estado:** Documento de información verificada. La clasificación y las síntesis se contrastan con las páginas oficiales citadas; no contiene datos aplicados ni resultados medidos del proyecto.
+
+Las *Core Personas* son los grupos principales que participan directamente en las decisiones FinOps y en la responsabilidad compartida sobre el valor del uso tecnológico [1]. Este documento usa exactamente seis personas oficiales: **Engineering (Ingeniería), Finance (Finanzas), Procurement (Adquisiciones), Product (Producto), FinOps Practitioner (Profesional de FinOps) y Leadership (Liderazgo)**. `Negocio` se usa únicamente para describir contexto, resultados u objetivos; no es una séptima *Core Persona*.
 
 ![[Pasted image 20260916182935.png|349]]
 
-## Ingeniería
+## Engineering (Ingeniería)
 
 Ingeniería influye directamente en el consumo mediante la arquitectura, el dimensionamiento y la operación. Decide patrones técnicos, horarios, capacidad, eliminación de recursos ociosos y respuesta a anomalías, equilibrando costo, velocidad, calidad, seguridad y confiabilidad. Recibe costos normalizados, demanda y restricciones; aporta utilización, desempeño, propietarios y viabilidad técnica [2].
 
@@ -12,11 +14,11 @@ Ingeniería influye directamente en el consumo mediante la arquitectura, el dime
 
 **Objetivos.** Entregar soluciones eficaces y costo-eficientes, incorporar el costo desde el diseño, estandarizar patrones sostenibles y mantener una asignación clara del consumo [2].
 
-**Métricas.** Como indicadores candidatos —sujetos a adopción del equipo y a datos del caso, no resultados medidos ni KPI obligatorios— pueden usarse utilización de servicios, costo por servicio desplegado, porcentaje de gasto asignado y tiempo de respuesta a anomalías [2].
+**Métricas clave.** Como indicadores candidatos —requieren adopción del equipo y datos del caso; no son resultados medidos ni KPI obligatorios— pueden usarse utilización de servicios, costo por servicio desplegado, porcentaje de gasto asignado y tiempo de respuesta a anomalías [2].
 
 **Roles habituales.** Software Engineer; Solutions Architect; DevOps Engineer [2].
 
-## Finanzas
+## Finance (Finanzas)
 
 Finanzas aporta el contexto financiero para presupuestar, prever, clasificar y reportar el gasto tecnológico. Analiza variaciones, asignación e implicaciones contables y participa en compromisos financieros, sin aprobar por defecto toda decisión técnica. Recibe consumo, previsiones y contratos; aporta presupuestos, escenarios y reglas de reporte [3].
 
@@ -24,23 +26,23 @@ Finanzas aporta el contexto financiero para presupuestar, prever, clasificar y r
 
 **Objetivos.** Cuantificar el valor del gasto tecnológico, mantener previsiones confiables, administrar presupuestos y producir reportes financieros comparables y conformes [3].
 
-**Métricas.** Como indicadores candidatos, pendientes de adopción y datos reales, pueden considerarse precisión del forecast, variación presupuestaria, porcentaje de gasto asignado y costo unitario. No representan resultados del caso ni KPI obligatorios [3].
+**Métricas clave.** Como indicadores candidatos —requieren adopción y datos reales del caso; no son resultados medidos ni KPI obligatorios— pueden considerarse precisión del forecast, variación presupuestaria, porcentaje de gasto asignado y costo unitario [3].
 
 **Roles habituales.** Financial Analyst; Budget Analyst; IT Financial Management Manager [3].
 
-## Adquisiciones
+## Procurement (Adquisiciones)
 
-Compras ejerce responsabilidad financiera y de gobierno comercial sobre proveedores, licencias y contratos. Decide estrategias de abastecimiento, negociación, renovación, compromisos y condiciones, para lo cual necesita previsiones antes de los hitos contractuales. Recibe demanda, uso y requisitos técnicos; aporta precios, plazos, obligaciones y riesgo de proveedor [4].
+Adquisiciones ejerce responsabilidad financiera y de gobierno comercial sobre proveedores, licencias y contratos. Decide estrategias de abastecimiento, negociación, renovación, compromisos y condiciones, para lo cual necesita previsiones antes de los hitos contractuales. Recibe demanda, uso y requisitos técnicos; aporta precios, plazos, obligaciones y riesgo de proveedor [4].
 
 **Beneficios.** La visibilidad del consumo actual y previsto permite negociar en el momento adecuado, comprobar el aprovechamiento de compromisos y licencias y comparar alternativas sin reducir la decisión a su precio nominal [4].
 
 **Objetivos.** Obtener contratos alineados con los objetivos organizacionales, administrar relaciones estratégicas, cumplir condiciones y ajustar el panorama de proveedores según la demanda [4].
 
-**Métricas.** Como indicadores candidatos —no mediciones ni KPI obligatorios— se proponen utilización de licencias o compromisos, cumplimiento contractual, costo por licencia o producto y gasto por proveedor; requieren adopción y datos del caso [4].
+**Métricas clave.** Como indicadores candidatos —no son mediciones ni KPI obligatorios— se proponen utilización de licencias o compromisos, cumplimiento contractual, costo por licencia o producto y gasto por proveedor; requieren adopción y datos del caso [4].
 
 **Roles habituales.** Sourcing Specialist; Contract Manager; Vendor Manager [4].
 
-## Producto
+## Product (Producto)
 
 Producto conecta estrategia, demanda y hoja de ruta con el consumo tecnológico. Decide alcance, prioridad y secuencia de iniciativas considerando valor, margen, experiencia y tiempo de salida. Recibe costos granulares, restricciones técnicas y escenarios; aporta requisitos, previsiones de demanda y unidades de valor [5].
 
@@ -48,23 +50,23 @@ Producto conecta estrategia, demanda y hoja de ruta con el consumo tecnológico.
 
 **Objetivos.** Acelerar crecimiento, conservar o mejorar márgenes, reducir tiempo de salida y entregar soluciones innovadoras de forma costo-eficiente [5].
 
-**Métricas.** Como indicadores candidatos —pendientes de adopción y datos, no resultados ni KPI obligatorios— pueden utilizarse margen de producto, costo por cliente, costo por funcionalidad y tiempo de salida al mercado [5].
+**Métricas clave.** Como indicadores candidatos —requieren adopción y datos del caso; no son resultados medidos ni KPI obligatorios— pueden utilizarse margen de producto, costo por cliente, costo por funcionalidad y tiempo de salida al mercado [5].
 
 **Roles habituales.** Product Analyst; Product Manager; Product Owner [5].
 
-## Profesionales de FinOps
+## FinOps Practitioner (Profesional de FinOps)
 
-Los encargados de FinOps coordina datos y conversaciones entre áreas, pero no reemplaza sus decisiones. Normaliza y asigna costos, prepara análisis, facilita indicadores y mantiene una cadencia adecuada para cada categoría tecnológica. Recibe facturación, uso, contratos, presupuestos y señales de valor; devuelve vistas comparables, alertas y seguimiento [6].
+El profesional de FinOps coordina datos y conversaciones entre áreas, pero no reemplaza sus decisiones. Normaliza y asigna costos, prepara análisis, facilita indicadores y mantiene una cadencia adecuada para cada categoría tecnológica. Recibe facturación, uso, contratos, presupuestos y señales de valor; devuelve vistas comparables, alertas y seguimiento [6].
 
 **Beneficios.** Una perspectiva transversal aumenta la confianza en datos, reportes y previsiones, hace visible la responsabilidad distribuida y permite que cada área decida con información consistente [6].
 
 **Objetivos.** Fomentar responsabilidad, transparencia y colaboración; comunicar el valor del uso tecnológico; establecer referencias y apoyar presupuestos, previsiones y mejora continua [6].
 
-**Métricas.** Como indicadores candidatos, que requieren adopción y datos del caso, se proponen precisión del forecast, variación presupuestaria, cobertura de asignación y consistencia de reportes. No son resultados medidos ni KPI obligatorios [6].
+**Métricas clave.** Como indicadores candidatos —requieren adopción y datos del caso; no son resultados medidos ni KPI obligatorios— se proponen precisión del forecast, variación presupuestaria, cobertura de asignación y consistencia de reportes [6].
 
 **Roles habituales.** FinOps Practitioner; FinOps Analyst; FinOps Team Lead [6].
 
-## Liderazgo y gobierno
+## Leadership (Liderazgo)
 
 Liderazgo establece objetivos, límites de decisión, recursos y mecanismos de rendición de cuentas. Prioriza inversiones y resuelve escalaciones cuando costo, riesgo o impacto exceden la autoridad operativa. Recibe síntesis de costo, desempeño, contratos y valor; aporta dirección, tolerancias y criterios de priorización [7].
 
@@ -72,18 +74,18 @@ Liderazgo establece objetivos, límites de decisión, recursos y mecanismos de r
 
 **Objetivos.** Alinear tecnología con estrategia, sostener presupuestos y valor, habilitar decisiones oportunas y promover una cultura de responsabilidad sin centralizar toda decisión [7].
 
-**Métricas.** Como indicadores candidatos —sujetos a adopción y datos, no resultados ni KPI obligatorios— pueden considerarse eficiencia de inversión, impacto tecnológico en ingresos, margen o COGS y cumplimiento presupuestario [7].
+**Métricas clave.** Como indicadores candidatos —requieren adopción y datos del caso; no son resultados medidos ni KPI obligatorios— pueden considerarse eficiencia de inversión, impacto tecnológico en ingresos, margen o COGS y cumplimiento presupuestario [7].
 
 **Roles habituales.** Chief Executive Officer (CEO); Chief Financial Officer (CFO); Chief Technology Officer (CTO) [7].
 
 ## Tabla resumen
 
-| Aspecto                 | Ingeniería                                                  | Finanzas                                                               | Compras                                                              | Producto                                              | Profesional de FinOps                                                         | Liderazgo                                                                          |
+| Aspecto                 | Engineering (Ingeniería)                                   | Finance (Finanzas)                                                     | Procurement (Adquisiciones)                                         | Product (Producto)                                    | FinOps Practitioner (Profesional de FinOps)                                  | Leadership (Liderazgo)                                                            |
 | ----------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | Tipo de responsabilidad | Operativa                                                   | Financiera                                                             | Financiera y gobierno comercial                                      | Operativa y valor                                     | Coordinación transversal                                                      | Gobierno estratégico                                                               |
 | Beneficios              | Costo visible desde diseño y operación                      | Mejor asignación, forecast y reporte                                   | Mejor negociación y uso contractual                                  | Costo conectado con margen y hoja de ruta             | Datos comparables y responsabilidad distribuida                               | Alineación, previsibilidad y control de riesgo                                     |
 | Objetivos               | Soluciones eficaces, costo-eficientes y asignables          | Presupuestar, prever, clasificar y reportar                            | Contratar con valor y gestionar proveedores                          | Crecer, proteger margen y reducir tiempo de salida    | Dar transparencia y facilitar decisiones                                      | Alinear inversión con estrategia y límites                                         |
-| Métricas propuestas     | Utilización<br>Costo por servicio<br>Gasto asignado         | Precisión del forecast<br>Variación presupuestaria<br>Costo unitario   | Uso de compromisos<br>Cumplimiento contractual<br>Costo por licencia | Margen<br>Costo por funcionalidad<br>Tiempo de salida | Precisión del forecast<br>Cobertura de asignación<br>Consistencia de reportes | Eficiencia de inversión<br>Impacto en ingresos/COGS<br>Cumplimiento presupuestario |
+| Métricas clave (candidatas) | Utilización<br>Costo por servicio<br>Gasto asignado     | Precisión del forecast<br>Variación presupuestaria<br>Costo unitario   | Uso de compromisos<br>Cumplimiento contractual<br>Costo por licencia | Margen<br>Costo por funcionalidad<br>Tiempo de salida | Precisión del forecast<br>Cobertura de asignación<br>Consistencia de reportes | Eficiencia de inversión<br>Impacto en ingresos/COGS<br>Cumplimiento presupuestario |
 | Tres roles habituales   | Software Engineer<br>Solutions Architect<br>DevOps Engineer | Financial Analyst<br>Budget Analyst<br>IT Financial Management Manager | Sourcing Specialist<br>Contract Manager<br>Vendor Manager            | Product Analyst<br>Product Manager<br>Product Owner   | FinOps Practitioner<br>FinOps Analyst<br>FinOps Team Lead                     | CEO<br>CFO<br>CTO                                                                  |
 | Decisiones principales  | Arquitectura, capacidad, horarios y anomalías               | Presupuesto, forecast, asignación y reporte                            | Negociación, renovación y compromisos                                | Alcance, prioridad y secuencia                        | Normalización, indicadores y cadencia                                         | Estrategia, políticas, recursos y escalamiento                                     |
 
