@@ -58,4 +58,4 @@ Las líneas de forecasting y de selección multi-cloud/proveedor son sublíneas,
 
 ## Enlace a Versión 3 validada (2026-09-20)
 
-La selección vigente conserva exactamente las cuatro tendencias, sublíneas y contexto definidos en la decisión final anterior: forecasting y selección multi-cloud/proveedor son sublíneas; guardrails, FinOps agéntico y `FP76-289` son contexto. La prosa final validada por Danilo está en [`FP-76 — Versión 3`](<../../../FP-76 - analisis, discusion, aporte, conclusiones y cuestionario (FINAL).md>). La validación es de Danilo el 2026-09-20; no implica aprobación de equipo ni docente ni sustituye FP-180.
+La selección vigente conserva exactamente las cuatro tendencias, sublíneas y contexto definidos en la decisión final anterior: forecasting y selección multi-cloud/proveedor son sublíneas; guardrails, FinOps agéntico y `FP76-289` son contexto. La prosa final validada por Danilo está en [`FP-76 — Versión 3`](../fp-76/analisis-discusion-aporte-conclusiones-cuestionario.md). La validación es de Danilo el 2026-09-20; no implica aprobación de equipo ni docente ni sustituye FP-180.

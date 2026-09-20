@@ -396,7 +396,7 @@ no un cálculo definitivo.
 ## 6. Trazabilidad bibliográfica final
 
 La siguiente tabla mapea los 13 IDs verificados citados en este documento a los campos bibliográficos del
-libro **[`Revision papers - cribado FP-76.xlsx`](../evidencia/Revision%20papers%20-%20cribado%20FP-76.xlsx)**. Se transcriben título, año, fuente o sede y DOI; si un campo
+libro **`Revision papers - cribado FP-76.xlsx`** (matriz local de trabajo, excluida de Git por decisión de alcance). Se transcriben título, año, fuente o sede y DOI; si un campo
 no estuviera disponible se marcaría como **No disponible en el libro**. En estos 13 registros no faltan esos
 cuatro campos.
 

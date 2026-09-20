@@ -37,4 +37,4 @@ La tabla inicial de tres es histórica (selección provisional 2026-09-18). La s
 
 ## Estado de verificación y enlace validado (2026-09-20)
 
-El nivel real de verificación es: 13 textos completos locales verificados con límites (12 candidatos y `FP76-289` como Reserva/contexto); 17 textos no disponibles no sustentan afirmaciones primarias. La Versión 3 fue validada humanamente por Danilo el 2026-09-20: [`FP-76 — Versión 3`](<../../FP-76 - analisis, discusion, aporte, conclusiones y cuestionario (FINAL).md>). No se atribuye aprobación de equipo o docente, ni se altera el libro FP-48.
+El nivel real de verificación es: 13 textos completos locales verificados con límites (12 candidatos y `FP76-289` como Reserva/contexto); 17 textos no disponibles no sustentan afirmaciones primarias. La Versión 3 fue validada humanamente por Danilo el 2026-09-20: [`FP-76 — Versión 3`](../docs/fp-76/analisis-discusion-aporte-conclusiones-cuestionario.md). No se atribuye aprobación de equipo o docente, ni se altera el libro FP-48.
