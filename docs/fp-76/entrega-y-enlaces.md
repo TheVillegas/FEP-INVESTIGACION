@@ -30,7 +30,7 @@ La fila 01 se retiró porque ese archivo no está en la carpeta actual de Drive.
 - Pull request: [#44 — `docs: publish FP-76 final research package`](https://github.com/TheVillegas/FEP-INVESTIGACION/pull/44).
 - Issue aprobado vinculado: [#43](https://github.com/TheVillegas/FEP-INVESTIGACION/issues/43).
 - Rama: `docs/fp-76-final-delivery` → `master`.
-- Etiquetas: exactamente un `type:*` (`type:docs`) y `size:exception` por las 1.987 líneas Markdown solicitadas en una sola PR.
+- Etiquetas: exactamente un `type:*` (`type:docs`) y `size:exception` por las más de 1.900 líneas Markdown solicitadas en una sola PR.
 - Alcance: 14 archivos Markdown; sin PDF, XLS/XLSX, credenciales ni planificación local.
 - Verificación: `git diff --check`, enlaces relativos y revisión independiente aprobados. GitHub no reportó workflows configurados para la rama.
 
