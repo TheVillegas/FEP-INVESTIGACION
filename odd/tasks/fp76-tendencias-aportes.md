@@ -20,7 +20,7 @@ Complete FP-76 and its subtasks FP-190, FP-189, FP-191, and FP-192 with traceabl
 - [x] 3. Independently verify sources, figures, contradictions, and limits for FP-189. Claim-level verification is complete and WoS provenance is observed for the six references already used; Scopus/SciELO are not inferred. Danilo validated Version 3 locally on 2026-09-20; this is not team or docent approval.
 - [x] 4. Evaluate economic mechanisms, overlap, risks, and the recorded human inclusion decisions for FP-191. Danilo's validated Version 3 contains the human comparative judgment and recommendation; this task does not claim external approval.
 - [x] 5. Prepare the source-backed critical-discussion and own-contribution inputs for FP-192. Danilo authored and validated the restricted final prose and questionnaire justification in Version 3; FP-192 preserves them as human content without reproducing it.
-- [x] 6. Verify deliverables, update research/AI traceability, and publish the Drive evidence. Drive publication and local artifact updates are complete; Jira final status transitions, final QA, PR completion, and commit/push authorization remain pending.
+- [x] 6. Verify deliverables, update research/AI traceability, and publish the Drive and GitHub evidence. Drive artifacts 02–07 and PR #44 are published; candidate QA passed and Jira publication comments were added. Pablo's FP-180 response, PR review/merge, and final Jira transitions remain pending.
 - [x] 7. Register and validate the Web of Science export: 348 records, 0 duplicates, preserved source SHA-256, and a derived screening workbook.
 - [x] 8. Complete the A1–A7 first pass and obtain Danilo's human decision for all 19 `Consultar` records.
 - [x] 9. Record Danilo's 2026-09-20 human disposition for all 13 Reserve records: FP76-002 to full text (`PDF_requerido=Sí`), FP76-304 and FP76-307 to Exclude, and FP76-006, FP76-036, FP76-050, FP76-051, FP76-060, FP76-086, FP76-092, FP76-243, FP76-290, and FP76-316 retained as Reserve. Totals at that checkpoint: 50 full-text candidates, 10 Reserve, 288 Exclude, 0 Consultar, 348 total.
@@ -46,15 +46,18 @@ Complete FP-76 and its subtasks FP-190, FP-189, FP-191, and FP-192 with traceabl
 
 ## Delivery closure checkpoint — 2026-09-20
 
-- [x] Local artifact update completed: the human-validated Version 3 was copied verbatim to [`docs/fp-76/analisis-discusion-aporte-conclusiones-cuestionario.md`](../../docs/fp-76/analisis-discusion-aporte-conclusiones-cuestionario.md), and the delivery links were reconciled.
+- [x] Local artifact update completed: the academic content of the human-validated Version 3 was preserved in [`docs/fp-76/analisis-discusion-aporte-conclusiones-cuestionario.md`](../../docs/fp-76/analisis-discusion-aporte-conclusiones-cuestionario.md); only two file references were adapted to the repository context, and the delivery links were reconciled.
 - [x] Drive publication completed for artifacts 02–07. The current folder has no artifact 01, so its stale delivery row was removed.
 - [x] Four final trends, verified WoS provenance, 13 verified full texts/17 unavailable, and the human validation of Version 3 are recorded in the delivery artifact.
 - [x] Jira ratification trace recorded: comment ID 10606, [FP-76](https://asistec.atlassian.net/browse/FP-76). GitHub approval recorded: [issue #43](https://github.com/TheVillegas/FEP-INVESTIGACION/issues/43).
-- [ ] External closure remains pending: FP-180 response; FP-53/FP-54/FP-56 confirmations; final Jira status transitions; PR completion; final QA; and authorized commit/push.
+- [x] GitHub branch `docs/fp-76-final-delivery` pushed and [PR #44](https://github.com/TheVillegas/FEP-INVESTIGACION/pull/44) opened with `type:docs` and `size:exception`. The committed range contains 14 Markdown files and no PDF/XLS/XLSX.
+- [x] Jira publication trace recorded: FP-76 comment 10607 and FP-189/FP-191/FP-192 comments 10608–10610.
+- [x] Candidate QA passed: `git diff --check`, repository-relative links, clean tree, evidence consistency, and independent committed-range verification. GitHub reports no configured checks for the branch.
+- [ ] External closure remains pending: FP-180 response; PR review/merge; and final Jira status transitions. Separate FP-53/FP-54/FP-56 confirmations are not blockers unless Jira explicitly requires them.
 
 ## Final verification
 
-- Local integration for the human-validated Version 3 is recorded; final QA remains pending.
-- Drive publication is complete. Jira final status transitions have not been performed by this task.
+- Local integration for the human-validated Version 3 is recorded; candidate QA passed.
+- Drive and PR publication are complete. Jira final status transitions have not been performed because Pablo's ratification remains open.
 - WoS provenance for the six references already used by FP-190/FP-189 is observed in the export (`SCI-EXPANDED`). Scopus/SciELO are not inferred.
-- Remaining holds: FP-180 ratification, FP-53/FP-54/FP-56 destination confirmation, Jira status transitions, PR completion, final QA, and commit/push authorization.
+- Remaining holds: FP-180 ratification, PR review/merge, and Jira status transitions.
