@@ -38,7 +38,7 @@ Los valores siguientes provienen de los artefactos verificados. FP-187 usa proxi
 | Costo optimizado + operación + implementación | USD 22.741,97 | USD 16.476,92 | East US conserva una ventaja de USD 6.265,05 bajo los mismos proxies. |
 | VAN incremental | USD 397,07 | USD -55,21 | Chile crea valor con los proxies; East US no alcanza la tasa exigida. |
 | TIR incremental anual | 43,91% | -0,21% | Indicador complementario; no sustituye al VAN. |
-| PRI descontado | Aproximadamente mes 30 | No recupera en 60 meses | El PRI debe incorporarse visiblemente al workbook. |
+| PRI descontado | Mes 30 | No recupera en 60 meses | Fórmula visible en FP-187: primer cruce no negativo del flujo descontado acumulado. |
 
 ### Lectura económica
 
@@ -147,9 +147,11 @@ Hasta completar esas validaciones, el resultado correcto es una **recomendación
 - [ ] Residencia, HA, RPO/RTO y SLA aprobados.
 - [ ] WACC o tasa financiera interna validada.
 - [ ] Costo empresa y horas reales de implementación/operación validados.
-- [ ] PRI incorporado al workbook de FP-187.
+- [x] PRI incorporado al workbook de FP-187 y verificado en `Resumen!K5:K6`, `Flujo mensual!X7:AA67` y `Auditoría!A14:E15`.
 - [ ] Sensibilidad recalculada con inputs internos.
 - [ ] Recomendación revisada por responsables técnico y financiero.
+
+La revisión documental de los 17 registros pendientes está en `docs/fp-188/auditoria-validaciones-pendientes.md`. El procedimiento, evidencia mínima y destino de actualización para cada registro están en `docs/fp-188/plan-cierre-17-validaciones.md`. La auditoría confirma que siguen faltando datos o aprobaciones humanas; los valores precargables solo mantienen operativo el escenario académico y no los sustituyen.
 
 ## Referencia de seguimiento
 
