@@ -19,10 +19,12 @@ Modelo actualizado con proxies públicos verificables y estimaciones de ingenier
 - VAN bruto: valor presente del ahorro cloud antes de implementación.
 - VAN incremental: flujo de ahorro menos operación FinOps mensual y costo de implementación en mes 0.
 - TIR incremental: TIR mensual del flujo neto anualizada como (1 + TIR mensual)^12 - 1.
+- PRI descontado: primer mes en que el flujo incremental descontado acumulado llega a cero o se vuelve positivo; si no ocurre dentro del horizonte, se informa que no recupera en 60 meses.
 - Tarifa proxy: ingreso medio neto mensual de personas ocupadas con educación universitaria (INE ESI 2024) dividido por 182 h/mes y por CLP 954.85/USD.
 - Esfuerzo de implementación: 50 h por escenario, desglosado en revisión/plan, rightsizing, programación, retención de logs, control y documentación.
 - Operación incremental: 1 h/mes por escenario, desglosada en revisión de costo/uso, anomalías/reporte y seguimiento.
 - Chile Central y East US son alternativas; sus costos de implementación no se suman entre sí.
+- Resultado PRI reproducible: Chile Central recupera en el mes 30; East US no recupera dentro de 60 meses con los proxies actuales.
 
 ## Evidencia oficial
 

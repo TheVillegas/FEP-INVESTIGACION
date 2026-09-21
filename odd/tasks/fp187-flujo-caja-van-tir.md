@@ -24,6 +24,7 @@ Completar la evaluación económica de TINV-06 sin duplicar el TCO ni ocultar su
 - Separar gasto cloud, ahorro bruto y flujo neto.
 - El workbook debe poder recalcularse modificando los supuestos.
 - No modificar FP-183 ni FP-184.
+- No convertir una ausencia de medición o aprobación humana en una validación positiva.
 
 ## Authorized scope
 - Crear workbook y trazabilidad de FP-187.
@@ -54,6 +55,9 @@ Completar la evaluación económica de TINV-06 sin duplicar el TCO ni ocultar su
 - [x] F187-03 Verificar cálculos y visualización. Evidencia vigente: `verify_fp187.mjs` reporta `errors: []`; base Chile 23,256.321466, East US 16,474.602675; ahorros FP-184 Chile 1,453.152, East US 936.48; VAN bruto con tasa proxy 5.5%: 1,272.06 y 819.77; inspección visual de las seis hojas sin defectos materiales.
 - [x] F187-04 Documentar trazabilidad y actualizar Jira. Trazabilidad creada y comentario 10590 registrado en FP-187; no se hizo transición a Done.
 - [x] F187-05 Incorporar proxies públicos para tasa, mano de obra y tipo de cambio; documentar horas de implementación/operación y recalcular VAN/TIR neto. Evidencia: MDSF 5.5%, INE CLP 1,483,153/mes, DT 42 h/semana, BCCh CLP 954.85/USD; tarifa proxy USD 8.5345/h; implementación 50 h (USD 426.73) y operación 1 h/mes. VAN neto: Chile USD 397.07, East US -USD 55.21; TIR anual: 43.91% y -0.21%; `errors: []` y controles de Auditoría OK/PROVISIONAL.
+- [x] F187-06 Auditar los 17 registros pendientes contra los artefactos actuales y documentar cuáles tienen evidencia suficiente, cuáles son exclusiones de alcance y cuáles todavía requieren medición o aprobación humana. Evidencia: `docs/fp-188/auditoria-validaciones-pendientes.md`; resultado 0 cerrados y 17 pendientes porque no existen mediciones, datos internos o aprobaciones formales en el repositorio.
+- [x] F187-07 Incorporar al workbook el PRI descontado reproducible por región mediante flujo descontado acumulado y exponer el resultado en Resumen y Auditoría. Evidencia: `Resumen!K5:K6`, `Flujo mensual!X7:AA67` y `Auditoría!A14:E15`; Chile mes 30, East US no recupera en 60 meses; controles `OK`, sin errores de fórmula. Prueba en copia: elevar `Supuestos!B35` de 8 h a 80 h cambia Chile a no recupera, confirmando recalculación dinámica.
+- [x] F187-08 Sincronizar la trazabilidad, la matriz consolidada y la recomendación FP-188 con el resultado verificado, sin presentar proxies como datos internos aprobados. Evidencia: trazabilidad FP-187, matriz consolidada con auditoría al 21-09-2026, checklist FP-188, sección 05 LaTeX y PDF completo actualizados.
 
 ## Next step
-Actualizar Jira FP-187 con los proxies, resultados y fuentes; mantener la etiqueta provisional hasta que el grupo sustituya los valores por datos internos.
+El cálculo del PRI y la auditoría documental están completados. Mantener la etiqueta provisional y los 17 registros pendientes hasta que los responsables entreguen datos internos, mediciones o aprobaciones formales; después recalcular FP-183 a FP-188 y revisar la recomendación.
